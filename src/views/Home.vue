@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<h1>Shm-doc</h1>
+		<h1>Shmdoc</h1>
 		<NameList/>
     <hr/>
     <FileList/>
