@@ -7,7 +7,6 @@
     <div>
       <input v-model="name" placeholder="name"/>
       <button v-on:click="add_name">Add name</button>
-      <h4>"{{name}}" will be added</h4>
     </div>
   </div>
 </template>
