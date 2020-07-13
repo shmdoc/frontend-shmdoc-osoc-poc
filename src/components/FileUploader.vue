@@ -22,10 +22,7 @@ export default {
       console.log('upload')
 
       let data = new FormData()
-      //data.append(this.fileList[0].name, this.fileList[0])
       data.append('file', this.fileList[0])
-
-      console.log(data)
 
       fetch('/files', {
         method: 'POST',
