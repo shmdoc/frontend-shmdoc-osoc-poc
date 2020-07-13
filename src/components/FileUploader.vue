@@ -10,20 +10,16 @@
 export default {
   data() {
     return {
-      fileList: null
+      fileList: null,
     }
   },
   methods: {
     handleFileChange(event) {
-      console.log(event.target.files)
       this.fileList = event.target.files
     },
     upload_file() {
-      console.log('upload')
-
       let data = new FormData()
       data.append('file', this.fileList[0])
-
       fetch('/files', {
         method: 'POST',
         body: data

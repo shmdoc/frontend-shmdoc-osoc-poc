@@ -19,7 +19,6 @@
             return response.json()
           })
           .then(json => {
-              console.log(json)
             let fileNames = []
             json.data.forEach(el => {
               fileNames.push(el.attributes.filename)

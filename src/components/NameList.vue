@@ -17,7 +17,7 @@
     data() {
       return {
         names: [],
-        name: ''
+        name: '',
       }
     },
     methods: {
