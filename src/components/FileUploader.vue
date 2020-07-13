@@ -1,7 +1,6 @@
 <template>
   <div>
     <input type="file" @change="handleFileChange"/>
-    <h4 v-if="fileList">Current file: {{fileList[0].name}}</h4>
     <button v-if="fileList" v-on:click="upload_file">Upload</button>
   </div>
 </template>
