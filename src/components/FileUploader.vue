@@ -16,16 +16,20 @@ export default {
   methods: {
     handleFileChange(event) {
       console.log(event.target.files)
-      this.fileList = (event.target.files)
+      this.fileList = event.target.files
     },
     upload_file() {
       console.log('upload')
+
+      let data = new FormData()
+      //data.append(this.fileList[0].name, this.fileList[0])
+      data.append('file', this.fileList[0])
+
+      console.log(data)
+
       fetch('/files', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        },
-        body: this.fileList[0]
+        body: data
         })
         .then(response => console.log(response))
         .catch(error => console.log(error))
