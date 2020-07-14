@@ -18,6 +18,7 @@ import JobListItem from '@/components/JobListItem.vue'
     },
     methods: {
       fetch_jobs() {
+        this.jobs = []
         fetch('/schema-analysis-jobs')
           .then(response => response.json())
           .then(json => {
