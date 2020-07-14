@@ -17,13 +17,7 @@ export default {
       this.fileList = event.target.files
     },
     upload_file() {
-      let data = new FormData()
-      data.append('file', this.fileList[0])
-      fetch('/files', {
-        method: 'POST',
-        body: data
-        })
-        .catch(error => console.log(error))
+      this.$store.dispatch('uploadFile', this.fileList[0])
     }
   }
 }
