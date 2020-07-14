@@ -6,6 +6,8 @@
     <FileUploader/>
     <hr/>
     <FileDeleter/>
+    <hr/>
+    <JobList/>
 	</div>
 </template>
 
@@ -13,11 +15,13 @@
 import FileList from '@/components/FileList.vue'
 import FileUploader from '@/components/FileUploader.vue'
 import FileDeleter from '@/components/FileDeleter.vue'
+import JobList from '@/components/JobList.vue'
 export default {
 	components: {
     FileList,
     FileUploader,
-    FileDeleter
+    FileDeleter,
+    JobList
 	}
 }
 </script>
