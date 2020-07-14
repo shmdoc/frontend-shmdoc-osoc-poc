@@ -1,18 +1,18 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import * as jobs from '@/store/modules/jobs.js'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
     uploadedFiles: [],
-    jobs: []
   },
   mutations: {
     ADD_FILE(state, file){
       state.uploadedFiles.push(file)
     },
-    ADD_JOB(state, job){
+    START_JOB(state, job){
       state.jobs.push(job)
     }
   },
@@ -34,35 +34,8 @@ export default new Vuex.Store({
           alert("Something went wrong when uploading file")
         })
     },
-    createJob({ commit }, file){
-      console.log("Creating job for: " + file.data.id)
-      let d = new Date();
-      let timestamp = d.toISOString();
-      let data = {data: {
-                          type: "schema-analysis-jobs",
-                          relationships: {
-                            file: {
-                              data: { type: "files", id: file.data.id }
-                            }
-                          },
-                          attributes: {
-                            created: timestamp
-                          }
-                        }
-      }
-      fetch('/schema-analysis-jobs', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/vnd.api+json'
-            },
-            body: JSON.stringify(data)
-          })
-          .then(response => response.json())
-          .then(json => console.log(json))
-          .catch(error => console.log(error))
-      commit("ADD_JOB", "Job: " + file.data.id)
-    },
   },
   modules: {
+    jobs
   }
 })
