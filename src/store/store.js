@@ -50,7 +50,7 @@ export default new Vuex.Store({
                           }
                         }
       }
-      fetch('/schema-analysis-jobs/' + file.data.id, {
+      fetch('/schema-analysis-jobs', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/vnd.api+json'
@@ -61,7 +61,7 @@ export default new Vuex.Store({
           .then(json => console.log(json))
           .catch(error => console.log(error))
       commit("ADD_JOB", "Job: " + file.data.id)
-    }
+    },
   },
   modules: {
   }
