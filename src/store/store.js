@@ -26,9 +26,7 @@ export default new Vuex.Store({
         })
         .then(response => response.json())
         .then(file => {
-          console.log(file)
           commit('ADD_FILE', file)
-          console.log(file)
           dispatch('createJob', file)
         })
         .catch(error => {
@@ -38,6 +36,30 @@ export default new Vuex.Store({
     },
     createJob({ commit }, file){
       console.log("Creating job for: " + file.data.id)
+      let d = new Date();
+      let timestamp = d.toISOString();
+      let data = {data: {
+                          type: "schema-analysis-jobs",
+                          relationships: {
+                            file: {
+                              data: { type: "files", id: file.data.id }
+                            }
+                          },
+                          attributes: {
+                            created: timestamp
+                          }
+                        }
+      }
+      fetch('/schema-analysis-jobs/' + file.data.id, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/vnd.api+json'
+            },
+            body: JSON.stringify(data)
+          })
+          .then(response => response.json())
+          .then(json => console.log(json))
+          .catch(error => console.log(error))
       commit("ADD_JOB", "Job: " + file.data.id)
     }
   },

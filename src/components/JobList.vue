@@ -13,11 +13,9 @@
       }
     },
     methods: {
-      fetch_file_names() {
+      fetch_jobs() {
         fetch('/schema-analysis-jobs')
-          .then(response => {
-            return response.json()
-          })
+          .then(response => response.json())
           .then(json => console.log(json))
           .catch(error => console.log(error))
       }
