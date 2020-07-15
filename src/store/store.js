@@ -12,9 +12,6 @@ export default new Vuex.Store({
     ADD_FILE(state, file){
       state.uploadedFiles.push(file)
     },
-    START_JOB(state, job){
-      state.jobs.push(job)
-    }
   },
   actions: {
     uploadFile({ commit, dispatch }, file){

@@ -1,27 +1,15 @@
 <template>
 	<div>
 		<h1>Shmdoc</h1>
-    <FileList/>
-    <hr/>
-    <FileUploader/>
-    <hr/>
-    <FileDeleter/>
-    <hr/>
-    <JobList/>
+    <router-link :to="{ name: 'historic-jobs' }">Historic Jobs</router-link>
+    <br/>
+    <router-link :to="{ name: 'new-job' }">New Job</router-link>
 	</div>
 </template>
 
 <script>
-import FileList from '@/components/FileList.vue'
-import FileUploader from '@/components/FileUploader.vue'
-import FileDeleter from '@/components/FileDeleter.vue'
-import JobList from '@/components/JobList.vue'
 export default {
 	components: {
-    FileList,
-    FileUploader,
-    FileDeleter,
-    JobList
 	}
 }
 </script>

@@ -1,6 +1,9 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
+import AllJobs from '../views/AllJobs.vue'
+import Job from '../views/Job.vue'
+import NewJob from '../views/NewJob.vue'
 
 Vue.use(VueRouter)
 
@@ -10,16 +13,22 @@ Vue.use(VueRouter)
     name: 'Home',
     component: Home
   },
-
-//  {
-//    path: '/about',
-//    name: 'About',
-//    // route level code-splitting
-//    // this generates a separate chunk (about.[hash].js) for this route
-//    // which is lazy-loaded when the route is visited.
-//    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-//  }
-
+  {
+    path: '/schema-analysis-jobs',
+    name: 'historic-jobs',
+    component: AllJobs
+  },
+  {
+    path: '/schema-analysis-jobs/new',
+    name: 'new-job',
+    component: NewJob
+  },
+  {
+    path: '/schema-analysis-jobs/:id',
+    name: 'job',
+    component: Job,
+    props: true
+  },
 ]
 
 const router = new VueRouter({
