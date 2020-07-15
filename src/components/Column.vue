@@ -22,14 +22,8 @@
 </template>
 
 <script>
-let column = { name: 'temperature', description: 'This is a column that shows the temperature', note: 'temperature in celsius', disableProcess: true,  datatype: 'double',
-               quantityKind: 'celsius', unit: 'C', recordCount: 15, missingCount: 2, nullCount: 3, min: 10, max: 20, mean: 15.6, median: 15, commonValues: 13}
 
 export default {
-  data() {
-    return {
-      column
-    }
-  }
+  props: ['column']
 }
 </script>

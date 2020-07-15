@@ -60,7 +60,6 @@ export const actions = {
 
 export const getters = {
   getJobById: state => id => {
-    console.log('acces getter')
     return state.jobs.find(job => job.id === id)
   }
 }
