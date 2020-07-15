@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class='event-card'>
     <span v-if="name">{{name}}</span>
     <span v-else>{{job.id}}</span>
     <br/>
@@ -30,3 +30,18 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+h4 {
+  margin: 0px;
+}
+.event-card {
+  padding: 10px;
+  margin-bottom: 24px;
+  transition: all 0.2s linear;
+}
+.event-card:hover {
+  transform: scale(1.01);
+  box-shadow: 0 3px 12px 0 rgba(0, 0, 0, 0.2), 0 1px 15px 0 rgba(0, 0, 0, 0.19);
+}
+</style>

@@ -1,6 +1,5 @@
 <template>
   <div>
-    <button v-on:click="fetch_jobs">Fetch Jobs</button>
     <JobListItem v-for="job in jobs" v-bind:key='job.id' :job='job'>{{job}}</JobListItem>
   </div>
 </template>
@@ -16,8 +15,7 @@ import JobListItem from '@/components/JobListItem.vue'
         jobs: [],
       }
     },
-    methods: {
-      fetch_jobs() {
+    mounted: function() {
         this.jobs = []
         fetch('/schema-analysis-jobs')
           .then(response => response.json())
@@ -27,6 +25,5 @@ import JobListItem from '@/components/JobListItem.vue'
           .catch(error => console.log(error))
       }
     }
-  }
 </script>
 

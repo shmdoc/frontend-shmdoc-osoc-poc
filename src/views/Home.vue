@@ -13,3 +13,12 @@ export default {
 	}
 }
 </script>
+
+<style scoped>
+.link {
+  color: black;
+  text-decoration: none;
+  font-weight: 100;
+  cursor: pointer;
+}
+</style>
