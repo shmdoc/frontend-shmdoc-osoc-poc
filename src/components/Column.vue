@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h5>colunm name: {{column.name}}</h5>
+    <h3>{{column.name}}</h3>
     <h5>description:</h5>
     <p>{{column.description}}</p>
     <h5>note:</h5>
