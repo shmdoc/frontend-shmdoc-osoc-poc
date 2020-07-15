@@ -1,10 +1,13 @@
 export const state = {
-  finishedJobs: [],
+  jobs: [],
   newJobs: []
 }
 
 export const mutations = {
   ADD_JOB(state, job){
+    state.jobs.push(job)
+  },
+  ADD_NEW_JOB(state, job){
     state.newJobs.push(job)
   },
   START_JOB(state, job){
@@ -13,6 +16,16 @@ export const mutations = {
 }
 
 export const actions = {
+  getJobs({ commit }) {
+    if (state.jobs.length == 0) {
+      fetch('/schema-analysis-jobs')
+        .then(response => response.json())
+        .then(json => {
+          json.data.forEach(job => commit('ADD_JOB', job))
+        })
+        .catch(error => console.log(error))
+    }
+  },
   createJob({ commit }, file){
     let d = new Date();
     let timestamp = d.toISOString();
@@ -42,5 +55,12 @@ export const actions = {
   startJob({ commit }, job){
     console.log('start job: ' + job.id)
     commit("START_JOB", job)
+  }
+}
+
+export const getters = {
+  getJobById: state => id => {
+    console.log('acces getter')
+    return state.jobs.find(job => job.id === id)
   }
 }

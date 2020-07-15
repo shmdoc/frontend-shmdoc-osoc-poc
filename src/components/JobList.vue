@@ -6,24 +6,21 @@
 
 <script>
 import JobListItem from '@/components/JobListItem.vue'
-  export default {
-    components: {
-      JobListItem
-    },
-    data() {
-      return {
-        jobs: [],
-      }
-    },
-    mounted: function() {
-        this.jobs = []
-        fetch('/schema-analysis-jobs')
-          .then(response => response.json())
-          .then(json => {
-            json.data.forEach(job => this.jobs.push(job))
-          })
-          .catch(error => console.log(error))
-      }
-    }
+
+import { mapState } from 'vuex'
+
+export default {
+  components: {
+    JobListItem
+  },
+  computed: {
+    ...mapState({
+      jobs: state => state.jobs.jobs
+    })
+  },
+  mounted: function() {
+    this.$store.dispatch('getJobs')
+  }
+}
 </script>
 
