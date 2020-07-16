@@ -23,7 +23,6 @@ export default new Vuex.Store({
         })
         .then(response => response.json())
         .then(file => {
-          console.log('upload')
           commit('ADD_FILE', file)
           dispatch('createJob', file)
         })

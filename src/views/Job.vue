@@ -33,7 +33,7 @@ export default {
   },
   methods: {
     fetch_columns() {
-      fetch('/schema-analysis-jobs/' + this.job.id + '/columns')
+      fetch('/schema-analysis-jobs/' + this.$route.params.id + '/columns')
           .then(response => response.json())
           .then(response => {
             response.data.forEach(column => this.columns.push(column))
