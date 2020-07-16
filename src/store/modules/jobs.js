@@ -1,6 +1,9 @@
+import router from '@/router'
+
 export const state = {
   jobs: [],
-  newJobs: []
+  newJobs: [],
+  startedJobs: []
 }
 
 export const mutations = {
@@ -11,7 +14,8 @@ export const mutations = {
     state.newJobs.push(job)
   },
   START_JOB(state, job){
-    state.jobs.push(job)
+    state.newJobs.filter(j => j.id !== job.id)
+    state.startedJobs.push(job)
   }
 }
 
@@ -50,18 +54,19 @@ export const actions = {
         })
         .then(response => response.json())
         .then(response => {
-          commit('ADD_JOB', response)
-          console.log(response)
-          dispatch('startJob', response)
+          commit('ADD_NEW_JOB', response)
+          dispatch('startJob', response.data)
         })
         .catch(error => console.log(error))
   },
   startJob({ commit }, job){
-    fetch('/schema-analysis-jobs/' + job.data.id + '/run')
+    fetch('/schema-analysis-jobs/' + job.id + '/run')
         .then(response => response.json())
-        .then(response => console.log(response))
+        .then(() => {
+          commit('START_JOB', job)
+          router.push({ name: 'job', params: {id: job.id} })
+        })
         .catch(error => console.log(error))
-    commit("START_JOB", job)
   }
 }
 

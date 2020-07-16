@@ -1,4 +1,5 @@
 <template>
+  <div>
   <router-link :to="{ name: 'job', params: {id: job.id} }">
     <div class='job-card'>
       <span v-if="name">{{name}}</span>
@@ -7,6 +8,8 @@
       <span>{{created}}</span>
     </div>
   </router-link>
+  <button v-on:click="startjob">start</button>
+  </div>
 </template>
 
 <script>
@@ -29,6 +32,12 @@ export default {
         .then(response => response.json())
         .then(response => this.name = response.data.attributes.filename)
         .catch(error => console.log(error))
+  },
+  methods: {
+    startjob(){
+      console.log(this.job)
+      this.$store.dispatch('startJob', this.job)
+    }
   }
 }
 </script>
