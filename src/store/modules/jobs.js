@@ -1,9 +1,9 @@
 import router from '@/router'
+import Vue from 'vue'
 
 export const state = {
   jobs: [],
-  newJobs: [],
-  startedJobs: []
+  runningJobs: []
 }
 
 export const mutations = {
@@ -13,12 +13,17 @@ export const mutations = {
        return new Date(b.attributes.created) - new Date(a.attributes.created);
     });
   },
-  ADD_NEW_JOB(state, job){
-    state.newJobs.push(job)
-  },
   START_JOB(state, job){
-    state.newJobs.filter(j => j.id !== job.id)
-    state.startedJobs.push(job)
+    state.runningJobs.push({finished: false, job })
+  },
+  FINISH_JOB(state, job){
+    state.runningJobs = state.runningJobs.filter(j => j.id !== job.id)
+    state.runningJobs.forEach(obj => {
+      if (obj.job.id === job.id) {
+        Vue.set(obj, 'finished', true)
+      }
+    })
+    state.jobs.push(job)
   }
 }
 
@@ -33,7 +38,7 @@ export const actions = {
         .catch(error => console.log(error))
     }
   },
-  createJob({ commit, dispatch }, file){
+  createJob({ dispatch }, file){
     let d = new Date();
     let timestamp = d.toISOString();
     let data = {data: {
@@ -57,17 +62,18 @@ export const actions = {
         })
         .then(response => response.json())
         .then(response => {
-          commit('ADD_NEW_JOB', response)
           dispatch('startJob', response.data)
         })
         .catch(error => console.log(error))
   },
   startJob({ commit }, job){
+    commit('START_JOB', job)
     fetch('/schema-analysis-jobs/' + job.id + '/run')
         .then(response => response.json())
         .then(() => {
-          commit('START_JOB', job)
-          router.push({ name: 'job', params: {id: job.id} })
+          commit('FINISH_JOB', job)
+          router
+          //router.push({ name: 'job', params: {id: job.id} })
         })
         .catch(error => console.log(error))
   }
