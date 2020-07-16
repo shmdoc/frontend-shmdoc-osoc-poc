@@ -2,6 +2,8 @@
   <div>
     <h3>{{column.name}}</h3>
 
+    <label>disable process </label>
+    <input id='disableProcess' v-model="column.disableProcess" type="checkbox"/>
     <table style="width:100%">
       <tr>
         <th>description</th>
@@ -67,8 +69,6 @@
 //    <p>{{column.description}}</p>
 //    <h5>note:</h5>
 //    <p>{{column.note}}</p>
-//    <label>disable process </label>
-//    <input id='disableProcess' v-model="column.disableProcess" type="checkbox"/>
 //    <h5>datatype: {{column.datatype}}</h5>
 //    <h5>quantity kind:{{column.quantityKind}}</h5>
 //    <h5>unit: {{column.unit}}</h5>
