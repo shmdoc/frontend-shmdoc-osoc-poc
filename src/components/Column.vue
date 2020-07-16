@@ -19,7 +19,7 @@
       </tr>
       <tr>
         <th>quantity kind</th>
-        <td>{{attributes.quantityKind}}</td>
+        <td>{{attributes["quantity-kind"]}}</td>
       </tr>
       <tr>
         <th>unit</th>
@@ -27,11 +27,11 @@
       </tr>
       <tr>
         <th>record count</th>
-        <td>{{attributes.recordCount}}</td>
+        <td>{{attributes["record-count"]}}</td>
       </tr>
       <tr>
         <th>missing count</th>
-        <td>{{attributes.missingCount}}</td>
+        <td>{{attributes["missing-count"]}}</td>
       </tr>
       <tr>
         <th>min</th>
@@ -51,7 +51,7 @@
       </tr>
       <tr>
         <th>common values</th>
-        <td>{{attributes.commonValues}}</td>
+        <td>{{attributes["common-values"]}}</td>
       </tr>
     </table>
   </div>
