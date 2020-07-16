@@ -6,12 +6,12 @@
       <div class="overview">
         <h2>Columns</h2>
         <div>
-          <h3 v-for="column in columns" :key="column.path" class="column-card"
-            v-on:click="changeSelected(column.path)">{{column.name}}</h3>
+          <h3 v-for="column in columns" :key="column.id" class="column-card"
+            v-on:click="changeSelected(column)">{{column.attributes.name}}</h3>
         </div>
       </div>
       <div class="data">
-      <Column v-if="selectedColumn" :column='selectedColumn'/>
+      <Column v-if="selectedColumn" :column='selectedColumn' :key="selectedColumn.id"/>
       </div>
     </div>
   </div>
@@ -33,24 +33,21 @@ export default {
   },
   methods: {
     fetch_columns() {
-      let column1 = { name: 'temperature', description: 'This is a column that shows the temperature', note: 'temperature in celsius', disableProcess: true,  datatype: 'double',
-        quantityKind: 'celsius', unit: 'C', recordCount: 15, missingCount: 2, nullCount: 3, min: 10, max: 20, mean: 15.6, median: 15, commonValues: 13, path: 1}
-      let column2 = { name: 'species', description: 'de soorten', note: 'niet alles is correct', disableProcess: false,  datatype: 'string',
-        quantityKind: 'determinatie', unit: '', recordCount: 14, missingCount: 3, nullCount: 3, min: 10, max: 20, mean: 15.6, median: 15, commonValues: 13, path: 2}
-      let column3 = { name: 'volume', description: '', note: '', disableProcess: false,  datatype: 'double',
-        quantityKind: 'celsius', unit: 'C', recordCount: 15, missingCount: 2, nullCount: 3, min: 10, max: 20, mean: 15.6, median: 15, commonValues: 13, path: 3}
-      let column4 = { name: 'age', description: 'This is a column that shows the temperature', note: 'temperature in celsius', disableProcess: true,  datatype: 'double',
-        quantityKind: 'celsius', unit: 'C', recordCount: 15, missingCount: 2, nullCount: 3, min: 10, max: 20, mean: 15.6, median: 15, commonValues: 13, path: 4}
-      return [column1, column2, column3, column4]
+      fetch('/schema-analysis-jobs/' + this.job.id + '/columns')
+          .then(response => response.json())
+          .then(response => {
+            response.data.forEach(column => this.columns.push(column))
+            this.selectedColumn = this.columns[0]
+          })
+          .catch(error => console.log(error))
     },
-    changeSelected(id){
-      this.selectedColumn = this.columns.find(column => column.path === id)
+    changeSelected(newColumn){
+      this.selectedColumn = this.columns.find(column => column.id === newColumn.id)
     },
   },
   mounted: function() {
     this.job = this.$store.getters.getJobById(this.$route.params.id)
-    this.columns = this.fetch_columns()
-    this.selectedColumn = this.columns[0]
+    this.fetch_columns()
   }
 }
 </script>

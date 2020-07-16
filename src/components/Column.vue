@@ -1,57 +1,57 @@
 <template>
   <div>
-    <h3>{{column.name}}</h3>
+    <h3>{{attributes.name}}</h3>
 
     <label>disable process </label>
-    <input id='disableProcess' v-model="column.disableProcess" type="checkbox"/>
+    <input id='disableProcess' v-model="attributes.disableProcess" type="checkbox"/>
     <table style="width:100%">
       <tr>
         <th>description</th>
-        <td>{{column.description}}</td>
+        <td>{{attributes.description}}</td>
       </tr>
       <tr>
         <th>note</th>
-        <td>{{column.note}}</td>
+        <td>{{attributes.note}}</td>
       </tr>
       <tr>
         <th>datatype</th>
-        <td>{{column.datatype}}</td>
+        <td>{{attributes.datatype}}</td>
       </tr>
       <tr>
         <th>quantity kind</th>
-        <td>{{column.quantityKind}}</td>
+        <td>{{attributes.quantityKind}}</td>
       </tr>
       <tr>
         <th>unit</th>
-        <td>{{column.unit}}</td>
+        <td>{{attributes.unit}}</td>
       </tr>
       <tr>
         <th>record count</th>
-        <td>{{column.recordCount}}</td>
+        <td>{{attributes.recordCount}}</td>
       </tr>
       <tr>
         <th>missing count</th>
-        <td>{{column.missingCount}}</td>
+        <td>{{attributes.missingCount}}</td>
       </tr>
       <tr>
         <th>min</th>
-        <td>{{column.min}}</td>
+        <td>{{attributes.min}}</td>
       </tr>
       <tr>
         <th>max</th>
-        <td>{{column.max}}</td>
+        <td>{{attributes.max}}</td>
       </tr>
       <tr>
         <th>mean</th>
-        <td>{{column.mean}}</td>
+        <td>{{attributes.mean}}</td>
       </tr>
       <tr>
         <th>median</th>
-        <td>{{column.median}}</td>
+        <td>{{attributes.median}}</td>
       </tr>
       <tr>
         <th>common values</th>
-        <td>{{column.commonValues}}</td>
+        <td>{{attributes.commonValues}}</td>
       </tr>
     </table>
   </div>
@@ -82,7 +82,12 @@
 //    <h5>common values: {{column.commonValues}}</h5>
 
 export default {
-  props: ['column']
+  props: ['column'],
+  data() {
+    return {
+      attributes: this.column.attributes
+    }
+  }
 }
 </script>
 
