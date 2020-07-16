@@ -1,5 +1,4 @@
 <template>
-  <div>
   <router-link :to="{ name: 'job', params: {id: job.id} }">
     <div class='job-card'>
       <span v-if="name">{{name}}</span>
@@ -8,8 +7,6 @@
       <span>{{created}}</span>
     </div>
   </router-link>
-  <button v-on:click="startjob">start</button>
-  </div>
 </template>
 
 <script>
