@@ -26,7 +26,7 @@ export const actions = {
         .catch(error => console.log(error))
     }
   },
-  createJob({ commit }, file){
+  createJob({ commit, dispatch }, file){
     let d = new Date();
     let timestamp = d.toISOString();
     let data = {data: {
@@ -49,11 +49,18 @@ export const actions = {
           body: JSON.stringify(data)
         })
         .then(response => response.json())
-        .then(response => commit(response))
+        .then(response => {
+          commit('ADD_JOB', response)
+          console.log(response)
+          dispatch('startJob', response)
+        })
         .catch(error => console.log(error))
   },
   startJob({ commit }, job){
-    console.log('start job: ' + job.id)
+    fetch('/schema-analysis-jobs/' + job.data.id + '/run')
+        .then(response => response.json())
+        .then(response => console.log(response))
+        .catch(error => console.log(error))
     commit("START_JOB", job)
   }
 }
