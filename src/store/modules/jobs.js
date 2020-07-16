@@ -9,6 +9,9 @@ export const state = {
 export const mutations = {
   ADD_JOB(state, job){
     state.jobs.push(job)
+    state.jobs.sort(function(a,b){
+       return new Date(b.attributes.created) - new Date(a.attributes.created);
+    });
   },
   ADD_NEW_JOB(state, job){
     state.newJobs.push(job)
