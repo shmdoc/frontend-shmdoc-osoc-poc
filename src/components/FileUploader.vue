@@ -15,7 +15,9 @@
       <h3 v-if="runningJobs.length === 0">Starting Jobs</h3>
       <div v-for="job in runningJobs" :key="job.id">
         <h4 v-if="!job.finished" class="running">{{job.job.id}}</h4>
-        <h4 v-else class="finished">{{job.job.id}}</h4>
+        <router-link v-else :to="{ name: 'job', params: {id: job.job.id} }">
+          <h4 class="finished">{{job.job.id}}</h4>
+        </router-link>
       </div>
     </div>
   </div>
