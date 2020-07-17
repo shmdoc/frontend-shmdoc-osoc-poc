@@ -51,7 +51,7 @@
         <tr>
           <th>common values</th>
           <td>
-            <table style="width: 100%">
+            <table v-if="attributes['common-values']" style="width: 100%">
               <tr>
                 <th>element</th>
                 <th>occurances</th>
@@ -132,7 +132,7 @@
         <tr>
           <th>common values</th>
           <td>
-            <table style="width: 100%">
+            <table v-if="attributes['common-values']" style="width: 100%">
               <tr>
                 <th>element</th>
                 <th>occurances</th>
@@ -179,6 +179,9 @@ export default {
     save() {
       this.editing = false
     }
+  },
+  mounted: function() {
+    console.log(this.attributes)
   }
 }
 </script>
