@@ -50,7 +50,20 @@
         </tr>
         <tr>
           <th>common values</th>
-          <td>{{attributes["common-values"]}}</td>
+          <td>
+            <table style="width: 100%">
+              <tr>
+                <th>element</th>
+                <th>occurances</th>
+              </tr>
+              <tr v-for="(value, i) in JSON.parse(attributes['common-values'])" :key="i">
+                <td>{{value.element}}</td>
+                <td>{{Math.round((value.occurances + Number.EPSILON) * 1000) / 1000}}%</td>
+              </tr>
+              <tr>
+              </tr>
+            </table>
+          </td>
         </tr>
         <tr>
           <th>disable processing</th>
@@ -118,7 +131,20 @@
         </tr>
         <tr>
           <th>common values</th>
-          <td>{{attributes["common-values"]}}</td>
+          <td>
+            <table style="width: 100%">
+              <tr>
+                <th>element</th>
+                <th>occurances</th>
+              </tr>
+              <tr v-for="(value, i) in JSON.parse(attributes['common-values'])" :key="i">
+                <td>{{value.element}}</td>
+                <td>{{Math.round((value.occurances + Number.EPSILON) * 1000) / 1000}}%</td>
+              </tr>
+              <tr>
+              </tr>
+            </table>
+          </td>
         </tr>
         <tr>
           <th>disable processing</th>
