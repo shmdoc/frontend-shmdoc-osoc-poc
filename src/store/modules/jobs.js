@@ -13,6 +13,17 @@ export const mutations = {
        return new Date(b.attributes.created) - new Date(a.attributes.created);
     });
   },
+  ADD_RUNNING_JOB(state, job){
+    let found = false
+    state.runningJobs.forEach(runningJob => {
+      if (runningJob.job.id === job.id) {
+        found = true
+      }
+    })
+    if (!found) {
+      state.runningJobs.push({finished: false, job })
+    }
+  },
   START_JOB(state, job){
     state.runningJobs.push({finished: false, job })
   },
@@ -37,6 +48,24 @@ export const actions = {
         })
         .catch(error => console.log(error))
     }
+  },
+  getRunningJobs({ commit }){
+    fetch('/schema-analysis-jobs')
+      .then(response => response.json())
+      .then(json => {
+        json.data.forEach(job => {
+          fetch(job.relationships.columns.links.related)
+              .then(response => response.json())
+              .then(response => {
+                if (response.data.length === 0) {
+                  commit('ADD_RUNNING_JOB', job)
+                }
+              })
+              .catch(error => console.log(error))
+        })
+      })
+      .catch(error => console.log(error))
+
   },
   createJob({ dispatch }, file){
     let d = new Date();
