@@ -1,59 +1,133 @@
 <template>
   <div>
     <h3>{{attributes.name}}</h3>
-
-    <label>disable process </label>
-    <input id='disableProcess' v-model="attributes.disableProcess" type="checkbox"/>
-    <table style="width:100%">
-      <tr>
-        <th>description</th>
-        <td>{{attributes.description}}</td>
-      </tr>
-      <tr>
-        <th>note</th>
-        <td>{{attributes.note}}</td>
-      </tr>
-      <tr>
-        <th>datatype</th>
-        <td>{{attributes.datatype}}</td>
-      </tr>
-      <tr>
-        <th>quantity kind</th>
-        <td>{{attributes["quantity-kind"]}}</td>
-      </tr>
-      <tr>
-        <th>unit</th>
-        <td>{{attributes.unit}}</td>
-      </tr>
-      <tr>
-        <th>record count</th>
-        <td>{{attributes["record-count"]}}</td>
-      </tr>
-      <tr>
-        <th>missing count</th>
-        <td>{{attributes["missing-count"]}}</td>
-      </tr>
-      <tr>
-        <th>min</th>
-        <td>{{attributes.min}}</td>
-      </tr>
-      <tr>
-        <th>max</th>
-        <td>{{attributes.max}}</td>
-      </tr>
-      <tr>
-        <th>mean</th>
-        <td>{{attributes.mean}}</td>
-      </tr>
-      <tr>
-        <th>median</th>
-        <td>{{attributes.median}}</td>
-      </tr>
-      <tr>
-        <th>common values</th>
-        <td>{{attributes["common-values"]}}</td>
-      </tr>
-    </table>
+    <div v-if="!editing">
+      <button v-on:click="edit">Edit</button>
+      <table style="width:100%">
+        <tr>
+          <th>description</th>
+          <td>{{attributes.description}}</td>
+        </tr>
+        <tr>
+          <th>note</th>
+          <td>{{attributes.note}}</td>
+        </tr>
+        <tr>
+          <th>datatype</th>
+          <td>{{attributes.datatype}}</td>
+        </tr>
+        <tr>
+          <th>quantity kind</th>
+          <td>{{attributes["quantity-kind"]}}</td>
+        </tr>
+        <tr>
+          <th>unit</th>
+          <td>{{attributes.unit}}</td>
+        </tr>
+        <tr>
+          <th>record count</th>
+          <td>{{attributes["record-count"]}}</td>
+        </tr>
+        <tr>
+          <th>missing count</th>
+          <td>{{attributes["missing-count"]}}</td>
+        </tr>
+        <tr>
+          <th>min</th>
+          <td>{{attributes.min}}</td>
+        </tr>
+        <tr>
+          <th>max</th>
+          <td>{{attributes.max}}</td>
+        </tr>
+        <tr>
+          <th>mean</th>
+          <td>{{attributes.mean}}</td>
+        </tr>
+        <tr>
+          <th>median</th>
+          <td>{{attributes.median}}</td>
+        </tr>
+        <tr>
+          <th>common values</th>
+          <td>{{attributes["common-values"]}}</td>
+        </tr>
+        <tr>
+          <th>disable processing</th>
+          <td>{{attributes['disable-processing']}}</td>
+        </tr>
+      </table>
+    </div>
+    <div v-else>
+      <button v-on:click="cancel">Cancel</button>
+      <button v-on:click="save">Save</button>
+      <table style="widht:100%">
+        <tr>
+          <th>description</th>
+          <td>
+            <textarea v-model="attributes.description"></textarea>
+          </td>
+        </tr>
+        <tr>
+          <th>note</th>
+          <td>
+            <textarea v-model="attributes.note"></textarea>
+          </td>
+        </tr>
+        <tr>
+          <th>datatype</th>
+          <td>
+            <input type="text" v-model="attributes.datatype"/>
+          </td>
+        </tr>
+        <tr>
+          <th>quantity kind</th>
+          <td>
+            <input type="text" v-model="attributes['quantity-kind']"/>
+          </td>
+        </tr>
+        <tr>
+          <th>unit</th>
+          <td>
+            <input type="text" v-model="attributes.unit"/>
+          </td>
+        </tr>
+        <tr>
+          <th>record count</th>
+          <td>{{attributes["record-count"]}}</td>
+        </tr>
+        <tr>
+          <th>missing count</th>
+          <td>{{attributes["missing-count"]}}</td>
+        </tr>
+        <tr>
+          <th>min</th>
+          <td>{{attributes.min}}</td>
+        </tr>
+        <tr>
+          <th>max</th>
+          <td>{{attributes.max}}</td>
+        </tr>
+        <tr>
+          <th>mean</th>
+          <td>{{attributes.mean}}</td>
+        </tr>
+        <tr>
+          <th>median</th>
+          <td>{{attributes.median}}</td>
+        </tr>
+        <tr>
+          <th>common values</th>
+          <td>{{attributes["common-values"]}}</td>
+        </tr>
+        <tr>
+          <th>disable processing</th>
+          <td>
+            <input v-model="attributes['disable-processing']" type="checkbox"/>
+          </td>
+        </tr>
+      </table>
+    </div>
   </div>
 </template>
 
@@ -63,7 +137,21 @@ export default {
   props: ['column'],
   data() {
     return {
-      attributes: this.column.attributes
+      attributes: this.column.attributes,
+      editing: false,
+    }
+  },
+  methods: {
+    edit() {
+      this.editing = true
+      this.backup = JSON.stringify(this.attributes) // to make a copy
+    },
+    cancel() {
+      this.editing = false
+      this.attributes = JSON.parse(this.backup)
+    },
+    save() {
+      this.editing = false
     }
   }
 }
