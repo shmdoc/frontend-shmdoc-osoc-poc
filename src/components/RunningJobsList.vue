@@ -8,6 +8,7 @@
           <LoadAnimation/>
         </div>
         <span>{{created(job)}}</span>
+        <button v-on:click="stopJob(job)">Stop</button>
       </div>
       <router-link v-else :to="{ name: 'job', params: {id: job.job.id} }">
         <h4 class="finished">{{job.job.id}}</h4>
@@ -38,6 +39,9 @@ export default {
     created(job) {
       return moment(job.job.attributes.created).format('lll')
     },
+    stopJob(job) {
+      this.$store.dispatch('stopJob', job)
+    }
   },
   created() {
     this.$store.dispatch('getRunningJobs')

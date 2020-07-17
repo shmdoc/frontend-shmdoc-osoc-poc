@@ -35,7 +35,10 @@ export const mutations = {
       }
     })
     state.jobs.push(job)
-  }
+  },
+  STOP_JOB(state, job){
+    state.runningJobs = state.runningJobs.filter(runningJob => runningJob.job.id !== job.job.id)
+  },
 }
 
 export const actions = {
@@ -103,6 +106,15 @@ export const actions = {
           commit('FINISH_JOB', job)
           router
           //router.push({ name: 'job', params: {id: job.id} })
+        })
+        .catch(error => console.log(error))
+  },
+  stopJob({ commit }, job) {
+    fetch('/schema-analysis-jobs/' + job.job.id, {
+          method: 'DELETE',
+        })
+        .then(() => {
+          commit('STOP_JOB', job)
         })
         .catch(error => console.log(error))
   }
