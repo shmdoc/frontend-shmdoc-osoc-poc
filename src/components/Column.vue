@@ -178,11 +178,26 @@ export default {
     },
     save() {
       this.editing = false
+
+//      let data = {data: {
+//                          type: "columns",
+//                          attributes: this.attributes,
+//                          id: this.column.id
+//                        }
+//      }
+//      data.attributes = this.attributes
+//      fetch('/columns/' + this.column.id, {
+//            method: 'PATCH',
+//            headers: {
+//              'Content-Type': 'application/vnd.api+json'
+//            },
+//          body: JSON.stringify(data)
+//          })
+//          .then(response => response.json())
+//          .then(response => console.log(response))
+//          .catch(error => console.log(error))
     }
   },
-  mounted: function() {
-    console.log(this.attributes)
-  }
 }
 </script>
 
