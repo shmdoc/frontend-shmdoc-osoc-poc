@@ -3,8 +3,11 @@
     <h3 v-if="runningJobs.length === 0">No jobs running, or they are starting</h3>
     <div v-for="job in runningJobs" :key="job.id">
       <div v-if="!job.finished">
-        <h4 class="running">{{job.job.id}}</h4>
-        <LoadAnimation/>
+        <div class="runningJobItem">
+          <h4 class="running">{{job.job.id}}</h4>
+          <LoadAnimation/>
+        </div>
+        <span>{{created(job)}}</span>
       </div>
       <router-link v-else :to="{ name: 'job', params: {id: job.job.id} }">
         <h4 class="finished">{{job.job.id}}</h4>
@@ -14,6 +17,7 @@
 </template>
 
 <script>
+import moment from 'moment'
 import { mapState } from 'vuex'
 import LoadAnimation from '@/components/LoadAnimation.vue'
 
@@ -30,6 +34,11 @@ export default {
       runningJobs: state => state.jobs.runningJobs
     })
   },
+  methods: {
+    created(job) {
+      return moment(job.job.attributes.created).format('lll')
+    },
+  },
   created() {
     this.$store.dispatch('getRunningJobs')
   }
@@ -42,5 +51,10 @@ export default {
 }
 .finished {
   color: green;
+}
+.runningJobItem {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 </style>
