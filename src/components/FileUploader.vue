@@ -14,7 +14,10 @@
     <div v-else>
       <h3 v-if="runningJobs.length === 0">Starting Jobs</h3>
       <div v-for="job in runningJobs" :key="job.id">
-        <h4 v-if="!job.finished" class="running">{{job.job.id}}</h4>
+        <div v-if="!job.finished">
+          <h4 class="running">{{job.job.id}}</h4>
+          <LoadAnim/>
+        </div>
         <router-link v-else :to="{ name: 'job', params: {id: job.job.id} }">
           <h4 class="finished">{{job.job.id}}</h4>
         </router-link>
@@ -25,8 +28,12 @@
 
 <script>
 import { mapState } from 'vuex'
+import LoadAnim from '@/components/LoadAnim.vue'
 
 export default {
+	components: {
+    LoadAnim
+  },
   data() {
     return {
       files: [],
