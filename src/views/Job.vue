@@ -3,6 +3,7 @@
     <h1>Job: {{this.$route.params.id}}</h1>
     <div v-if="running">
       <h3>Job is still running</h3>
+      <button v-on:click="refresh">Refresh</button>
     </div>
     <div v-else>
       <hr/>
@@ -54,6 +55,20 @@ export default {
     changeSelected(newColumn){
       this.selectedColumn = this.columns.find(column => column.id === newColumn.id)
     },
+    refresh() {
+      fetch('/schema-analysis-jobs/' + this.$route.params.id + '/columns')
+          .then(response => response.json())
+          .then(response => {
+            if (response.data.length === 0) {
+              alert('Job is still running')
+            }else {
+              this.running = false
+              response.data.forEach(column => this.columns.push(column))
+              this.selectedColumn = this.columns[0]
+            }
+          })
+          .catch(error => console.log(error))
+    }
   },
   mounted: function() {
     this.job = this.$store.getters.getJobById(this.$route.params.id)
