@@ -5,6 +5,8 @@
       <span v-else>{{job.id}}</span>
       <br/>
       <span>{{created}}</span>
+      <br/>
+      <span v-if="running">Running</span>
     </div>
   </router-link>
 </template>
@@ -16,7 +18,8 @@ export default {
   props: ['job'],
   data() {
     return {
-      name: null
+      name: null,
+      running: false
     }
   },
   computed: {
@@ -25,17 +28,19 @@ export default {
     }
   },
   mounted: function() {
-    fetch(this.job.relationships.file.links.self)
+    fetch(this.job.relationships.file.links.related)
         .then(response => response.json())
         .then(response => this.name = response.data.attributes.filename)
         .catch(error => console.log(error))
+    fetch(this.job.relationships.columns.links.related)
+        .then(response => response.json())
+        .then(response => {
+          if (response.data.length === 0) {
+            this.running = true
+          }
+        })
+        .catch(error => console.log(error))
   },
-  methods: {
-    startjob(){
-      console.log(this.job)
-      this.$store.dispatch('startJob', this.job)
-    }
-  }
 }
 </script>
 

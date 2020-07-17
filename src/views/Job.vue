@@ -1,17 +1,22 @@
 <template>
   <div>
     <h1>Job: {{this.$route.params.id}}</h1>
-    <hr/>
-    <div class="container">
-      <div class="overview">
-        <h2>Columns</h2>
-        <div>
-          <h3 v-for="column in columns" :key="column.id" class="column-card"
-            v-on:click="changeSelected(column)">{{column.attributes.name}}</h3>
+    <div v-if="running">
+      <h3>Job is still running</h3>
+    </div>
+    <div v-else>
+      <hr/>
+      <div class="container">
+        <div class="overview">
+          <h2>Columns</h2>
+          <div>
+            <h3 v-for="column in columns" :key="column.id" class="column-card"
+              v-on:click="changeSelected(column)">{{column.attributes.name}}</h3>
+          </div>
         </div>
-      </div>
-      <div class="data">
-      <Column v-if="selectedColumn" :column='selectedColumn' :key="selectedColumn.id"/>
+        <div class="data">
+        <Column v-if="selectedColumn" :column='selectedColumn' :key="selectedColumn.id"/>
+        </div>
       </div>
     </div>
   </div>
@@ -28,7 +33,8 @@ export default {
     return {
       job: null,
       columns: [],
-      selectedColumn: null
+      selectedColumn: null,
+      running: false
     }
   },
   methods: {
@@ -36,8 +42,12 @@ export default {
       fetch('/schema-analysis-jobs/' + this.$route.params.id + '/columns')
           .then(response => response.json())
           .then(response => {
-            response.data.forEach(column => this.columns.push(column))
-            this.selectedColumn = this.columns[0]
+            if (response.data.length === 0) {
+              this.running = true
+            }else {
+              response.data.forEach(column => this.columns.push(column))
+              this.selectedColumn = this.columns[0]
+            }
           })
           .catch(error => console.log(error))
     },
