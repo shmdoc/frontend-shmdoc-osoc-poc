@@ -4,6 +4,7 @@ import Home from '../views/Home.vue'
 import AllJobs from '../views/AllJobs.vue'
 import Job from '../views/Job.vue'
 import NewJob from '../views/NewJob.vue'
+import RunningJobs from '../views/RunningJobs.vue'
 
 Vue.use(VueRouter)
 
@@ -22,6 +23,11 @@ Vue.use(VueRouter)
     path: '/schema-analysis-jobs/new',
     name: 'new-job',
     component: NewJob
+  },
+  {
+    path: '/schema-analysis-jobs/running',
+    name: 'running-jobs',
+    component: RunningJobs
   },
   {
     path: '/schema-analysis-jobs/:id',
