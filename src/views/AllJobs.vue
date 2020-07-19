@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Jobs</h1>
+    <h1>HISTORIC JOBS</h1>
     <JobList/>
   </div>
 </template>
@@ -17,6 +17,9 @@ export default {
 <style scoped>
 div {
   text-align: center;
+}
+h1 {
+  font-weight: 550;
 }
 </style>
 

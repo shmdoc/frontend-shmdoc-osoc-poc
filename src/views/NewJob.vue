@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>New Job</h1>
+    <h1>NEW JOB</h1>
     <FileUploader/>
   </div>
 </template>
