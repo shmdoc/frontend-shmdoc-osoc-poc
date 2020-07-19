@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Running Jobs</h1>
+    <h1>RUNNING JOBS</h1>
     <RunningJobsList/>
     </div>
 </template>
@@ -19,10 +19,7 @@ export default {
 div {
   text-align: center;
 }
-.running {
-  color: red;
-}
-.finished {
-  color: green;
+h1 {
+  font-weight: 550;
 }
 </style>
