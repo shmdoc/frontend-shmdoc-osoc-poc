@@ -1,11 +1,16 @@
 <template>
-	<div>
-    <router-link :to="{ name: 'historic-jobs' }">Historic Jobs</router-link>
-    <br/>
-    <router-link :to="{ name: 'new-job' }">New Job</router-link>
-    <br/>
-    <router-link :to="{ name: 'running-jobs' }">Running Jobs</router-link>
-	</div>
+	<div class="wrapper">
+    <div>
+      <div class="titlecontainer">
+        <h1>SHMDOC</h1>
+      </div>
+      <div class="navigation">
+        <router-link :to="{ name: 'new-job' }" class="headerlink">New Job</router-link>
+        <router-link :to="{ name: 'running-jobs' }" class="headerlink">Running Jobs</router-link>
+        <router-link :to="{ name: 'historic-jobs' }" class="headerlink">Historic Jobs</router-link>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -16,10 +21,32 @@ export default {
 </script>
 
 <style scoped>
-.link {
-  color: black;
+.wrapper {
+  margin-top: 75px;
+}
+.titlecontainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+h1 {
+  font-size: 50px;
+  font-weight: 550;
+}
+.navigation {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.headerlink {
+  padding: 10px;
   text-decoration: none;
-  font-weight: 100;
-  cursor: pointer;
+  text-transform: uppercase;
+  color: black;
+  border: solid black 1px;
+  margin: 10px;
 }
 </style>
