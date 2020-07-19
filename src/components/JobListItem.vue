@@ -1,12 +1,12 @@
 <template>
-  <router-link :to="{ name: 'job', params: {id: job.id} }">
+  <router-link :to="{ name: 'job', params: {id: job.id} }" class="link">
     <div class='job-card'>
       <span v-if="name">{{name}}</span>
       <span v-else>{{job.id}}</span>
       <br/>
       <span>{{created}}</span>
       <br/>
-      <span v-if="running">Running</span>
+      <span>Running...</span>
     </div>
   </router-link>
 </template>
@@ -46,12 +46,31 @@ export default {
 
 <style scoped>
 .job-card {
-  padding: 10px;
-  margin-bottom: 24px;
+  padding: 0px;
+  margin-bottom: 20px;
   transition: all 0.2s linear;
+
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 30%;
+}
+.job-card:after {
+  content: "";
+  display: block;
+  width: 75%;
+  margin: 1em auto 0;
+  border-bottom: solid black 1px;
 }
 .job-card:hover {
   transform: scale(1.01);
-  box-shadow: 0 3px 12px 0 rgba(0, 0, 0, 0.2), 0 1px 15px 0 rgba(0, 0, 0, 0.19);
+  box-shadow: 0 3px 12px 0 rgba(0, 0, 0, 0.2), 0 1px 12px 0 rgba(0, 0, 0, 0.2);
+}
+.link {
+  text-decoration: none;
+  color: black;
+
+  display: flex;
+  justify-content: center;
 }
 </style>
