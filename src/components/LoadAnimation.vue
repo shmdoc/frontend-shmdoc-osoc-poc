@@ -23,11 +23,12 @@ export default {
 
 <style scoped>
 .box {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  widht: 20px;
-  height: 20px;
+  display: grid;
+  place-items: center;
+
+  min-width: 20px;
+  min-height: 20px;
+  margin: 5px;
 }
 .ball {
   width: 10px;
