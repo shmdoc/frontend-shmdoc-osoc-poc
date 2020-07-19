@@ -4,11 +4,14 @@
       <div>
         <input name="file" id="file" type="file" @change="handleFileChange" multiple class="inputfile"/>
         <label for="file">Choose a file</label>
-        <button v-if="files.length > 0" v-on:click="uploadFiles">Upload</button>
       </div>
-      <div class="fileItem" v-for="file in files" :key="file.lastModified">
-        <h4>{{file.name}}</h4>
-        <button v-on:click="removeFile(file)">remove</button>
+      <div>
+        <br/> <!-- this is because the input is a absolute positioned element -->
+        <button  v-if="files.length > 0" v-on:click="uploadFiles">Upload</button>
+        <div class="fileItem" v-for="file in files" :key="file.lastModified">
+          <h4 class="filename">{{file.name}}</h4>
+          <button v-on:click="removeFile(file)">remove</button>
+        </div>
       </div>
     </div>
   </div>
@@ -53,23 +56,27 @@ export default {
   position: absolute;
   z-index: -1;
 }
-
 .inputfile + label {
   border-radius: 3px;
   border: 1px solid #333;
   padding: 3px;
-}
-
-.inputfile + label {
   cursor: pointer;
+  height: 30px;
 }
 .fileItem {
   display: flex;
+  align-items: center;
 }
-.running {
-  color: red;
+button {
+  border-radius: 3px;
+  border: 1px solid #333;
+  padding: 3px;
+  cursor: pointer;
+  background-color: white;
+  height: 30px;
 }
-.finished {
-  color: green;
+.filename {
+  margin-right: 20px;
+  font-weight: 500;
 }
 </style>
