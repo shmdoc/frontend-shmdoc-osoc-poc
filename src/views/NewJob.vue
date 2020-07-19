@@ -19,4 +19,7 @@ export default {
 div {
   text-align: center;
 }
+h1 {
+  font-weight: 550;
+}
 </style>
