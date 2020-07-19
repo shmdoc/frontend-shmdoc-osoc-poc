@@ -6,7 +6,7 @@
       <br/>
       <span>{{created}}</span>
       <br/>
-      <span>Running...</span>
+      <span v-if="running">{{runningText}}</span>
     </div>
   </router-link>
 </template>
@@ -19,12 +19,26 @@ export default {
   data() {
     return {
       name: null,
-      running: false
+      running: false,
+      runningTextState: 0
     }
   },
   computed: {
     created() {
       return moment(this.job.attributes.created).format('lll')
+    },
+    runningText() {
+      let text = ['Running', 'Running.', 'Running..', 'Running...']
+      return text[this.runningTextState]
+    }
+  },
+  methods: {
+    updateRun() {
+      if (this.runningTextState < 3) {
+        this.runningTextState++
+      } else {
+        this.runningTextState = 0
+      }
     }
   },
   mounted: function() {
@@ -41,6 +55,11 @@ export default {
         })
         .catch(error => console.log(error))
   },
+  created() {
+    setInterval(() => {
+      this.updateRun()
+    }, 500)
+  }
 }
 </script>
 
