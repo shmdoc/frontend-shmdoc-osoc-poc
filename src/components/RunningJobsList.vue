@@ -3,14 +3,16 @@
     <h3 v-if="runningJobs.length === 0">No jobs running, or they are starting</h3>
     <div v-for="job in runningJobs" :key="job.id">
       <div v-if="!job.finished">
-        <div class="runningJobItem">
-          <h4 class="running">{{job.job.id}}</h4>
-          <LoadAnimation/>
+        <div class="wrapper">
+          <div class="runningJobItem">
+            <h4 class="running">{{job.job.id}}</h4>
+            <LoadAnimation/>
+          </div>
+          <span>{{created(job)}}</span>
+          <button v-on:click="stopJob(job)">Stop</button>
         </div>
-        <span>{{created(job)}}</span>
-        <button v-on:click="stopJob(job)">Stop</button>
       </div>
-      <router-link v-else :to="{ name: 'job', params: {id: job.job.id} }">
+      <router-link v-else :to="{ name: 'job', params: {id: job.job.id} }" class="link">
         <h4 class="finished">{{job.job.id}}</h4>
       </router-link>
       </div>
@@ -60,5 +62,25 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.wrapper:after {
+  content: "";
+  display: block;
+  width: 25%;
+  margin: 1em auto 0;
+  border-bottom: solid black 1px;
+}
+.link {
+  text-decoration: none;
+  color: black;
+}
+button {
+  border-radius: 3px;
+  border: 1px solid #333;
+  padding: 3px;
+  cursor: pointer;
+  background-color: white;
+  height: 30px;
+  margin-left: 10px;
 }
 </style>
