@@ -1,8 +1,10 @@
 <template>
   <div id="app">
-    <header v-if="!onHome">
-      <Header/>
-    </header>
+    <transition name="headerfade">
+      <header v-if="!onHome">
+        <Header/>
+      </header>
+    </transition>
     <router-view/>
   </div>
 </template>
@@ -33,5 +35,12 @@ body {
 
   display: grid;
   grid-template-rows: auto 1fr;
+}
+.headerfade-enter, .headerfade-leave-to {
+  opacity: 0;
+  transform: translateY(-100px);
+}
+.headerfade-enter-active, .headerfade-leave-active {
+  transition: all 0.5s;
 }
 </style>
