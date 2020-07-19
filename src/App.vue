@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <header>
+    <header v-if="!onHome">
       <Header/>
     </header>
     <router-view/>
@@ -13,7 +13,12 @@ import Header from '@/components/Header.vue'
 export default {
 	components: {
     Header
-	}
+	},
+  computed: {
+    onHome() {
+      return this.$route.name === 'home'
+    }
+  }
 }
 </script>
 
