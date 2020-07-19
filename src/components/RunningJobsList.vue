@@ -83,4 +83,7 @@ button {
   height: 30px;
   margin-left: 10px;
 }
+h3 {
+  font-weight: 200;
+}
 </style>
