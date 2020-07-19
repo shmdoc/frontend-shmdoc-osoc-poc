@@ -16,6 +16,9 @@ export default {
 </script>
 
 <style scoped>
+div {
+  text-align: center;
+}
 .running {
   color: red;
 }
