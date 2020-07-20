@@ -5,9 +5,20 @@
         <input name="file" id="file" type="file" @change="handleFileChange" multiple class="inputfile"/>
         <label for="file">Choose a file</label>
       </div>
-      <div>
+      <div v-if="files.length > 0">
         <br/> <!-- this is because the input is a absolute positioned element -->
-        <button  v-if="files.length > 0" v-on:click="uploadFiles">Upload</button>
+
+        <input v-if="!addingSource" type="text" list="source" v-model="selectedSource"/>
+        <datalist id="source">
+          <option v-for="source in sources" :key="source">{{source}}</option>
+        </datalist>
+
+        <input v-if="addingSource" v-model="newSource" placeholder="new source"/>
+        <button v-on:click="addSource">{{addingSource ? "Add" : "Add a new source"}}</button>
+        <button v-if="addingSource" v-on:click="cancelAddSource">cancel</button>
+      </div>
+      <div>
+        <button v-if="files.length > 0" v-on:click="uploadFiles">Upload</button>
         <div class="fileItem" v-for="file in files" :key="file.lastModified">
           <h4 class="filename">{{file.name}}</h4>
           <button v-on:click="removeFile(file)">remove</button>
@@ -22,7 +33,11 @@ export default {
   data() {
     return {
       files: [],
-      uploaded: false
+      uploaded: false,
+      selectedSource: '',
+      sources: ["zeehondjes", "water", "zandkorrels", "duingras"],
+      addingSource: false,
+      newSource: ""
     }
   },
   methods: {
@@ -38,6 +53,21 @@ export default {
       this.files.forEach(file => this.$store.dispatch('uploadFile', file))
       this.uploaded = true
       this.$router.push({ name: 'running-jobs'})
+    },
+    addSource() {
+      if (this.addingSource) {
+        this.sources.push(this.newSource)
+        this.addingSource = !this.addingSource
+        this.newSource = ""
+        console.log("source added, not added to db")
+      } else {
+        this.newSource = ""
+        this.addingSource = !this.addingSource
+      }
+    },
+    cancelAddSource() {
+      this.newSource = ""
+      this.addingSource = false
     }
   }
 }
@@ -65,6 +95,7 @@ export default {
 }
 .fileItem {
   display: flex;
+  justify-content: center;
   align-items: center;
 }
 button {
