@@ -1,25 +1,21 @@
 <template>
   <div>
+    <div v-if="!running" class="columns">
+      <div class="togglecatcher" v-on:click="toggleColumns">
+        <h2>Columns</h2>
+      </div>
+      <div v-if="open">
+        <hr/>
+        <h3 v-for="column in columns" :key="column.id" class="column-card"
+          v-on:click="changeSelected(column)">{{column.attributes.name}}</h3>
+      </div>
+    </div>
     <h1>Analysis for {{this.name}}</h1>
     <div v-if="running">
       <h3>Job is still running</h3>
       <button v-on:click="refresh">Refresh</button>
     </div>
-    <div v-else>
-      <hr/>
-      <div class="container">
-        <div class="overview">
-          <h2>Columns</h2>
-          <div>
-            <h3 v-for="column in columns" :key="column.id" class="column-card"
-              v-on:click="changeSelected(column)">{{column.attributes.name}}</h3>
-          </div>
-        </div>
-        <div class="data">
-        <Column v-if="selectedColumn" :column='selectedColumn' :key="selectedColumn.id"/>
-        </div>
-      </div>
-    </div>
+    <Column v-if="selectedColumn" :column='selectedColumn' :key="selectedColumn.id"/>
   </div>
 </template>
 
@@ -35,7 +31,8 @@ export default {
       job: null,
       columns: [],
       selectedColumn: null,
-      running: false
+      running: false,
+      open: false
     }
   },
   methods: {
@@ -60,6 +57,7 @@ export default {
     },
     changeSelected(newColumn){
       this.selectedColumn = this.columns.find(column => column.id === newColumn.id)
+      this.open = false
     },
     refresh() {
       fetch('/schema-analysis-jobs/' + this.$route.params.id + '/columns')
@@ -75,6 +73,9 @@ export default {
           })
           .catch(error => console.log(error))
     },
+    toggleColumns() {
+      this.open = !this.open
+    }
   },
   mounted: function() {
     this.job = this.$store.getters.getJobById(this.$route.params.id)
@@ -88,23 +89,27 @@ export default {
 div {
   text-align: center;
 }
-.container {
-  display: grid;
-  grid-template-columns: 1fr 4fr;
-  grid-template-rows: auto;
-  grid-template-areas: "overview data";
+.togglecatcher{
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
 }
-.overview {
-  grid-area: overview;
+.columns {
+  position: absolute;
+  margin: 8px;
+  min-width: 340px;
+  max-height: 90%;
   border-radius: 8px;
   border: 1px solid #333;
+  background-color: white;
+  overflow-y: auto;
 }
 .data {
-  grid-area: data;
+  display: flex;
+  justify-content: center;
 }
 .column-card {
   padding: 10px;
-  margin-bottom: 24px;
   transition: all 0.2s linear;
 }
 .column-card:hover {

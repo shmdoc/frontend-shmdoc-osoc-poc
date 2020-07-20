@@ -1,9 +1,9 @@
 <template>
   <div>
     <h3>{{attributes.name}}</h3>
-    <div v-if="!editing">
+    <div v-if="!editing" class="tablecontainer">
       <button v-on:click="edit">Edit</button>
-      <table style="width:100%">
+      <table style="width: 100%">
         <tr>
           <th>description</th>
           <td>{{attributes.description}}</td>
@@ -76,10 +76,10 @@
         </tr>
       </table>
     </div>
-    <div v-else>
+    <div v-else class="tablecontainer">
       <button v-on:click="cancel">Cancel</button>
       <button v-on:click="save">Save</button>
-      <table style="widht:100%">
+      <table style="width:100%">
         <tr>
           <th>description</th>
           <td>
@@ -210,10 +210,12 @@ export default {
 </script>
 
 <style scoped>
+.tablecontainer {
+  margin: 8px;
+}
 table, th, td {
   border: 1px solid black;
   border-collapse: collapse;
-  margin: 0 10px 0 10px ;
 }
 th, td {
   padding: 5px;
