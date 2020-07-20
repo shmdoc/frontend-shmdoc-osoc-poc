@@ -18,7 +18,12 @@
         </tr>
         <tr>
           <th>quantity kind</th>
-          <td>{{attributes["quantity-kind"]}}</td>
+          <td>
+            <div class="quantityKind">
+              <span>{{attributes["quantity-kind"]}}</span>
+              <button v-on:click="showRelated">Show Related</button>
+            </div>
+          </td>
         </tr>
         <tr>
           <th>unit</th>
@@ -196,6 +201,9 @@ export default {
 //          .then(response => response.json())
 //          .then(response => console.log(response))
 //          .catch(error => console.log(error))
+    },
+    showRelated() {
+      alert('Not yet implemented')
     }
   },
 }
@@ -210,5 +218,9 @@ table, th, td {
 th, td {
   padding: 5px;
   text-align: left;
+}
+.quantityKind {
+  display: flex;
+  justify-content: flex-end;
 }
 </style>
