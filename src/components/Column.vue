@@ -54,11 +54,11 @@
             <table v-if="attributes['common-values']" style="width: 100%">
               <tr>
                 <th>element</th>
-                <th>occurances</th>
+                <th>occurrences</th>
               </tr>
               <tr v-for="(value, i) in JSON.parse(attributes['common-values'])" :key="i">
                 <td>{{value.element}}</td>
-                <td>{{Math.round((value.occurances + Number.EPSILON) * 1000) / 1000}}%</td>
+                <td>{{Math.round((value.occurances + Number.EPSILON) * 100000) / 1000}}%</td>
               </tr>
               <tr>
               </tr>
@@ -135,11 +135,11 @@
             <table v-if="attributes['common-values']" style="width: 100%">
               <tr>
                 <th>element</th>
-                <th>occurances</th>
+                <th>occurrances</th>
               </tr>
               <tr v-for="(value, i) in JSON.parse(attributes['common-values'])" :key="i">
                 <td>{{value.element}}</td>
-                <td>{{Math.round((value.occurances + Number.EPSILON) * 1000) / 1000}}%</td>
+                <td>{{Math.round((value.occurances + Number.EPSILON) * 100000) / 1000}}%</td>
               </tr>
               <tr>
               </tr>
