@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Job: {{this.$route.params.id}}</h1>
+    <h1>Analysis for {{this.name}}</h1>
     <div v-if="running">
       <h3>Job is still running</h3>
       <button v-on:click="refresh">Refresh</button>
@@ -52,6 +52,12 @@ export default {
           })
           .catch(error => console.log(error))
     },
+    fetch_name() {
+      fetch(this.job.relationships.file.links.related)
+          .then(response => response.json())
+          .then(response => this.name = response.data.attributes.filename)
+          .catch(error => console.log(error))
+    },
     changeSelected(newColumn){
       this.selectedColumn = this.columns.find(column => column.id === newColumn.id)
     },
@@ -68,11 +74,12 @@ export default {
             }
           })
           .catch(error => console.log(error))
-    }
+    },
   },
   mounted: function() {
     this.job = this.$store.getters.getJobById(this.$route.params.id)
     this.fetch_columns()
+    this.fetch_name()
   }
 }
 </script>
