@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>HISTORIC JOBS</h1>
+    <h1>HISTORIC ANALYSES</h1>
     <JobList/>
   </div>
 </template>

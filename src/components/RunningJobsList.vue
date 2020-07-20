@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h3 v-if="runningJobs.length === 0">No jobs running, or they are starting</h3>
+    <h3 v-if="runningJobs.length === 0">No analyses running, or they are starting</h3>
     <div v-for="job in runningJobs" :key="job.id">
       <div v-if="!job.finished">
         <div class="wrapper">
