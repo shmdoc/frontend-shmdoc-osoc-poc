@@ -43,8 +43,8 @@ export default {
   },
   computed: {
     ...mapState({
-      sources: state => sources.sources
-    })
+      sources: state => state.sources.sources
+    }),
   },
   methods: {
     handleFileChange(event) {
@@ -64,6 +64,7 @@ export default {
       if (this.addingSource) {
         this.$store.dispatch('addSource', this.newSource)
         this.addingSource = !this.addingSource
+        this.selectedSource = this.newSource
         this.newSource = ""
         console.log("source added, not added to db")
       } else {
