@@ -29,16 +29,22 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 export default {
   data() {
     return {
       files: [],
       uploaded: false,
       selectedSource: '',
-      sources: ["zeehondjes", "water", "zandkorrels", "duingras"],
       addingSource: false,
       newSource: ""
     }
+  },
+  computed: {
+    ...mapState({
+      sources: state => sources.sources
+    })
   },
   methods: {
     handleFileChange(event) {
@@ -56,7 +62,7 @@ export default {
     },
     addSource() {
       if (this.addingSource) {
-        this.sources.push(this.newSource)
+        this.$store.dispatch('addSource', this.newSource)
         this.addingSource = !this.addingSource
         this.newSource = ""
         console.log("source added, not added to db")
