@@ -49,7 +49,6 @@ export const actions = {
         .then(response => response.json())
         .then(response => commit('ADD_SOURCE', response.data))
         .catch(error => console.log(error))
-    commit('ADD_SOURCE', source)
   }
 }
 
