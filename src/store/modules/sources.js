@@ -3,15 +3,15 @@ export const state = {
 }
 
 export const mutations = {
-  ADD_SOURCE(state, source) {
+  ADD_SOURCE(state, newSource) {
     let found = false
     state.sources.forEach(source => {
-      if (source.id === source.id) {
+      if (source.id === newSource.id) {
         found = true
       }
     })
     if (!found) {
-      state.sources.push(source)
+      state.sources.push(newSource)
     }
   }
 }
@@ -47,7 +47,7 @@ export const actions = {
           body: JSON.stringify(data)
         })
         .then(response => response.json())
-        .then(response => console.log(response))
+        .then(response => commit('ADD_SOURCE', response.data))
         .catch(error => console.log(error))
     commit('ADD_SOURCE', source)
   }
