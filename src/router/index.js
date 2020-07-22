@@ -6,6 +6,7 @@ import Job from '../views/Job.vue'
 import NewJob from '../views/NewJob.vue'
 import RunningJobs from '../views/RunningJobs.vue'
 import Sources from '../views/Sources.vue'
+import Source from '../views/Source.vue'
 
 Vue.use(VueRouter)
 
@@ -41,6 +42,11 @@ Vue.use(VueRouter)
     name: 'sources',
     component: Sources,
   },
+  {
+    path: '/sources/:id',
+    name: 'source',
+    component: Source,
+  }
 ]
 
 const router = new VueRouter({

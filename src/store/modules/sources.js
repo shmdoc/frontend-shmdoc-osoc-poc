@@ -53,4 +53,7 @@ export const actions = {
 }
 
 export const getters = {
+  getSourceById: state => id => {
+    return state.sources.find(source => source.id === id)
+  }
 }
