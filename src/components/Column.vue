@@ -107,7 +107,10 @@
         <tr>
           <th>unit</th>
           <td>
-            <input type="text" v-model="attributes.unit"/>
+            <input type="text" list="units" v-model="attributes.unit"/>
+            <datalist id="units">
+              <option v-for="unit in units" :key="unit.id" :value="unit.attributes.name"/>
+            </datalist>
           </td>
         </tr>
         <tr>
@@ -163,6 +166,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 
 export default {
   props: ['column'],
@@ -171,6 +175,11 @@ export default {
       attributes: this.column.attributes,
       editing: false,
     }
+  },
+  computed: {
+    ...mapState({
+      units: state => state.units.units
+    }),
   },
   methods: {
     edit() {
@@ -183,6 +192,19 @@ export default {
     },
     save() {
       this.editing = false
+
+      //get id of unittype
+      let id = null
+      this.units.forEach(unit => {
+        if (unit.attributes.name === this.attributes.unit) {
+          id = unit.id
+        }
+      })
+      if (id) {
+        console.log(id)
+      }else{
+        alert('No valid source')
+      }
 
 //      let data = {data: {
 //                          type: "columns",

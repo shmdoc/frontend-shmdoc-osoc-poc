@@ -33,7 +33,6 @@
 <script>
 import { mapState } from 'vuex'
 
-//<option v-for="source in sources" :key="source.id" :value="source.id">{{source.attributes.name}}</option>
 export default {
   data() {
     return {
