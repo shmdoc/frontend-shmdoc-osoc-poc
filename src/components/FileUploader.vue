@@ -69,7 +69,7 @@ export default {
         }
       })
       if (id) {
-        this.files.forEach(file => this.$store.dispatch('uploadFile', {file, source: id}, id))
+        this.files.forEach(file => this.$store.dispatch('uploadFile', {file, source: id}))
         this.uploaded = true
         this.$router.push({ name: 'running-jobs'})
       }else{
