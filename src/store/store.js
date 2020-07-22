@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import * as jobs from '@/store/modules/jobs.js'
 import * as sources from '@/store/modules/sources.js'
+import * as units from '@/store/modules/units.js'
 
 Vue.use(Vuex)
 
@@ -36,6 +37,7 @@ export default new Vuex.Store({
   },
   modules: {
     jobs,
-    sources
+    sources,
+    units
   }
 })
