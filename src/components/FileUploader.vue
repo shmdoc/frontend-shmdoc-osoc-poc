@@ -10,10 +10,9 @@
 
         <input v-if="!addingSource" type="text" list="source" v-model="selectedSource"/>
         <datalist id="source">
-          <option v-for="source in sources" :key="source.id" :value="source.attributes.name" data-id="source.id"/>
+          <option v-for="source in sources" :key="source.id" :value="source.attributes.name"/>
         </datalist>
 
-        <h4>{{selectedSource}}</h4>
         <input v-if="addingSource" v-model="newSource" placeholder="new source"/>
         <input v-if="addingSource" v-model="newSourceNote" placeholder="note"/>
         <button v-on:click="addSource">{{addingSource ? "Add" : "Add a new source"}}</button>
