@@ -38,7 +38,7 @@ export default {
   },
   methods: {
     fetch_columns() {
-      fetch('/schema-analysis-jobs/' + this.$route.params.id + '/columns')
+      fetch('/schema-analysis-jobs/' + this.$route.params.id + '/columns?page[size]=100')
           .then(response => response.json())
           .then(response => {
             if (response.data.length === 0) {
@@ -61,7 +61,7 @@ export default {
       this.open = false
     },
     refresh() {
-      fetch('/schema-analysis-jobs/' + this.$route.params.id + '/columns')
+      fetch('/schema-analysis-jobs/' + this.$route.params.id + '/columns?page[size]=100')
           .then(response => response.json())
           .then(response => {
             if (response.data.length === 0) {
