@@ -1,14 +1,14 @@
 <template>
   <div>
     <h2>Source "{{source.attributes.name}}"</h2>
-        <h3
-          v-for="job in jobs"
-          :key="job.id"
-          class="column-card"
-          v-on:click="changeSelected(column)"
-        >
-            {{job.attributes.created}}
-        </h3>
+      <router-link
+        v-for="job in jobs"
+        :key="job.id"
+        :to="{ name: 'job', params: {id: job.id} }"
+        class="link"
+      >
+        <h3>{{job.attributes.created}}</h3>
+      </router-link>
   </div>
 </template>
 
@@ -24,7 +24,7 @@ export default {
     }
   },
   methods: {
-    fetch_columns() {
+    fetch_jobs() {
       fetch('/sources/' + this.$route.params.id + '/analysis-jobs')
           .then(response => response.json())
           .then(response => {
@@ -39,7 +39,8 @@ export default {
     },
   },
   mounted: function() {
-    this.source = this.$store.getters.getSourceById(this.$route.params.id)
+    this.source = this.$store.getters.getSourceById(this.$route.params.id);
+    this.fetch_jobs();
   }
 }
 </script>
