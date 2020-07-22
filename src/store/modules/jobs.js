@@ -81,7 +81,9 @@ export const actions = {
                           file: {
                             data: { type: "files", id: file.data.id }
                           },
-                          source: { type: "source", id: source }
+                          source: {
+                            data: { type: "source", id: source }
+                          }
                         },
                         attributes: {
                           created: timestamp
