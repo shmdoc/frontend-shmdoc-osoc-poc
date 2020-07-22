@@ -5,9 +5,9 @@
         <h1>SHMDOC</h1>
       </div>
       <div class="navigation">
-        <router-link :to="{ name: 'new-job' }" class="headerlink">New Job</router-link>
-        <router-link :to="{ name: 'running-jobs' }" class="headerlink">Running Jobs</router-link>
-        <router-link :to="{ name: 'historic-jobs' }" class="headerlink">Historic Jobs</router-link>
+        <router-link :to="{ name: 'new-job' }" class="headerlink">New Analysis</router-link>
+        <router-link :to="{ name: 'running-jobs' }" class="headerlink">Running Analyses</router-link>
+        <router-link :to="{ name: 'historic-jobs' }" class="headerlink">Historic Analyses</router-link>
       </div>
     </div>
   </div>
