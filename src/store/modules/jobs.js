@@ -70,7 +70,9 @@ export const actions = {
       .catch(error => console.log(error))
 
   },
-  createJob({ dispatch }, file){
+  createJob({ dispatch }, args){
+    let file = args.file
+    let source = args.source
     let d = new Date();
     let timestamp = d.toISOString();
     let data = {data: {
@@ -78,7 +80,8 @@ export const actions = {
                         relationships: {
                           file: {
                             data: { type: "files", id: file.data.id }
-                          }
+                          },
+                          source: { type: "source", id: source }
                         },
                         attributes: {
                           created: timestamp

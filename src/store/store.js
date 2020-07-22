@@ -15,7 +15,8 @@ export default new Vuex.Store({
     },
   },
   actions: {
-    uploadFile({ commit, dispatch }, file){
+    uploadFile({ commit, dispatch }, args){
+      let file = args.file
       let data = new FormData()
       data.append('file', file)
       fetch('/files', {
@@ -25,7 +26,7 @@ export default new Vuex.Store({
         .then(response => response.json())
         .then(file => {
           commit('ADD_FILE', file)
-          dispatch('createJob', file)
+          dispatch('createJob', {file, source: args.source})
         })
         .catch(error => {
           console.log(error)

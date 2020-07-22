@@ -10,13 +10,16 @@
 
         <input v-if="!addingSource" type="text" list="source" v-model="selectedSource"/>
         <datalist id="source">
-          <option v-for="source in sources" :key="source">{{source}}</option>
+          <option v-for="source in sources" :key="source.id" :value="source.attributes.name" data-id="source.id"/>
         </datalist>
 
+        <h4>{{selectedSource}}</h4>
         <input v-if="addingSource" v-model="newSource" placeholder="new source"/>
+        <input v-if="addingSource" v-model="newSourceNote" placeholder="note"/>
         <button v-on:click="addSource">{{addingSource ? "Add" : "Add a new source"}}</button>
         <button v-if="addingSource" v-on:click="cancelAddSource">cancel</button>
       </div>
+
       <div>
         <button v-if="files.length > 0" v-on:click="uploadFiles">Upload</button>
         <div class="fileItem" v-for="file in files" :key="file.lastModified">
@@ -31,6 +34,7 @@
 <script>
 import { mapState } from 'vuex'
 
+//<option v-for="source in sources" :key="source.id" :value="source.id">{{source.attributes.name}}</option>
 export default {
   data() {
     return {
@@ -38,7 +42,8 @@ export default {
       uploaded: false,
       selectedSource: '',
       addingSource: false,
-      newSource: ""
+      newSource: "",
+      newSourceNote: ""
     }
   },
   computed: {
@@ -56,19 +61,32 @@ export default {
       this.files = this.files.filter(f => f.name !== file.name)
     },
     uploadFiles() {
-      this.files.forEach(file => this.$store.dispatch('uploadFile', file))
-      this.uploaded = true
-      this.$router.push({ name: 'running-jobs'})
+
+      let id = null
+      this.sources.forEach(source => {
+        if (source.attributes.name === this.selectedSource) {
+          id = source.id
+        }
+      })
+      if (id) {
+        this.files.forEach(file => this.$store.dispatch('uploadFile', {file, source: id}, id))
+        this.uploaded = true
+        this.$router.push({ name: 'running-jobs'})
+      }else{
+        alert('No valid source')
+      }
+
     },
     addSource() {
       if (this.addingSource) {
-        this.$store.dispatch('addSource', this.newSource)
+        this.$store.dispatch('addSource', {name: this.newSource, note: this.newSourceNote})
         this.addingSource = !this.addingSource
         this.selectedSource = this.newSource
         this.newSource = ""
-        console.log("source added, not added to db")
+        this.newSourceNote = ""
       } else {
         this.newSource = ""
+        this.newSourceNote = ""
         this.addingSource = !this.addingSource
       }
     },
@@ -76,6 +94,9 @@ export default {
       this.newSource = ""
       this.addingSource = false
     }
+  },
+  created() {
+    this.$store.dispatch('fetchSources')
   }
 }
 </script>
