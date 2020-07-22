@@ -32,7 +32,8 @@ export default {
       columns: [],
       selectedColumn: null,
       running: false,
-      open: false
+      open: false,
+      name: ''
     }
   },
   methods: {
@@ -81,6 +82,7 @@ export default {
     this.job = this.$store.getters.getJobById(this.$route.params.id)
     this.fetch_columns()
     this.fetch_name()
+    this.$store.dispatch('fetch_units')
   }
 }
 </script>
