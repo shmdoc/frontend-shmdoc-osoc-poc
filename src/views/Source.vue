@@ -1,3 +1,5 @@
+<!-- Note: I know I've written way too much comments, but that also helps me to understand everything -->
+
 <template>
   <div>
     <h1 v-if="source">Source "{{source.attributes.name}}"</h1>
@@ -28,9 +30,6 @@ export default {
             })
           })
           .catch(error => console.log(error))
-    },
-    changeSelected () {
-      // Navigate to job
     },
   },
   mounted: function() {
