@@ -63,7 +63,7 @@
               </tr>
               <tr v-for="(value, i) in JSON.parse(attributes['common-values'])" :key="i">
                 <td>{{value.element}}</td>
-                <td>{{Math.round((value.occurences + Number.EPSILON) * 100000) / 1000}}%</td>
+                <td>{{Math.round((value.occurrences + Number.EPSILON) * 100000) / 1000}}%</td>
               </tr>
               <tr>
               </tr>
@@ -147,7 +147,7 @@
               </tr>
               <tr v-for="(value, i) in JSON.parse(attributes['common-values'])" :key="i">
                 <td>{{value.element}}</td>
-                <td>{{Math.round((value.occurences + Number.EPSILON) * 100000) / 1000}}%</td>
+                <td>{{Math.round((value.occurrences + Number.EPSILON) * 100000) / 1000}}%</td>
               </tr>
               <tr>
               </tr>
