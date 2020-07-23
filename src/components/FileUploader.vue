@@ -15,7 +15,7 @@
 
         <input v-if="addingSource" v-model="newSource" placeholder="new source"/>
         <input v-if="addingSource" v-model="newSourceNote" placeholder="note"/>
-        <button v-on:click="addSource">{{addingSource ? "Add" : "Add a new source"}}</button>
+        <button v-if="!sourceGiven" v-on:click="addSource">{{addingSource ? "Add" : "Add a new source"}}</button>
         <button v-if="addingSource" v-on:click="cancelAddSource">cancel</button>
       </div>
 
@@ -34,6 +34,7 @@
 import { mapState } from 'vuex'
 
 export default {
+  props: ['source'],
   data() {
     return {
       files: [],
@@ -95,6 +96,12 @@ export default {
   },
   created() {
     this.$store.dispatch('fetchSources')
+    if (this.source) {
+      this.selectedSource = this.source.attributes.name
+      this.sourceGiven = true
+    } else {
+      this.sourceGiven = false
+    }
   }
 }
 </script>

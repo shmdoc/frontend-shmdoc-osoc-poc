@@ -24,7 +24,8 @@ Vue.use(VueRouter)
   {
     path: '/schema-analysis-jobs/new',
     name: 'new-job',
-    component: NewJob
+    component: NewJob,
+    props: true
   },
   {
     path: '/schema-analysis-jobs/running',

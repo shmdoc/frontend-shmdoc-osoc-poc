@@ -1,8 +1,9 @@
-<!-- Note: I know I've written way too much comments, but that also helps me to understand everything -->
-
 <template>
   <div>
-    <h1 v-if="source">Source "{{source.attributes.name}}"</h1>
+    <div class="container">
+      <h1 v-if="source">SOURCE "{{source.attributes.name}}"</h1>
+      <button v-on:click="addAnalysis">Add Analysis</button>
+    </div>
     <JobListItem v-for="job in jobs" v-bind:key='job.id' :job='job'>{{job}}</JobListItem>
   </div>
 </template>
@@ -31,6 +32,9 @@ export default {
           })
           .catch(error => console.log(error))
     },
+    addAnalysis() {
+      this.$router.push({name: 'new-job', params: { source: this.source }})
+    }
   },
   mounted: function() {
     this.source = this.$store.getters.getSourceById(this.$route.params.id);
@@ -45,5 +49,13 @@ div {
 }
 h1 {
   font-weight: 550;
+}
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+button {
+  margin-left: 20px;
 }
 </style>
