@@ -5,7 +5,7 @@
       <span v-else>{{job.id}}</span>
       <br/>
       <span>{{created}}</span>
-      <br/>
+      <br v-if="running"/>
       <span v-if="running">{{runningText}}</span>
     </div>
   </router-link>

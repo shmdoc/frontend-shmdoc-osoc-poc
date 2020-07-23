@@ -1,21 +1,16 @@
 <template>
   <div>
-    <h2>Source "{{source.attributes.name}}"</h2>
-      <router-link
-        v-for="job in jobs"
-        :key="job.id"
-        :to="{ name: 'job', params: {id: job.id} }"
-        class="link"
-      >
-        <h3>{{job.attributes.created}}</h3>
-      </router-link>
+    <h2 v-if="source">Source "{{source.attributes.name}}"</h2>
+    <JobListItem v-for="job in jobs" v-bind:key='job.id' :job='job'>{{job}}</JobListItem>
   </div>
 </template>
 
 <script>
+import JobListItem from '@/components/JobListItem.vue'
 
 export default {
   components: {
+    JobListItem
   },
   data() {
     return {
@@ -28,9 +23,9 @@ export default {
       fetch('/sources/' + this.$route.params.id + '/analysis-jobs')
           .then(response => response.json())
           .then(response => {
-            if (response.data.length) {
-              response.data.forEach(job => this.jobs.push(job))
-            }
+            response.data.forEach(job => {
+              this.jobs.push(job)
+            })
           })
           .catch(error => console.log(error))
     },
@@ -46,5 +41,10 @@ export default {
 </script>
 
 <style scoped>
-
+div {
+  text-align: center;
+}
+h1 {
+  font-weight: 550;
+}
 </style>

@@ -46,6 +46,7 @@ Vue.use(VueRouter)
     path: '/sources/:id',
     name: 'source',
     component: Source,
+    props: true
   }
 ]
 
