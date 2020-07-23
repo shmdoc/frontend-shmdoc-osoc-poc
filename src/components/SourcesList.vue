@@ -21,6 +21,7 @@ export default {
   },
   mounted: function() {
     this.$store.dispatch('fetchSources')
+    this.$store.dispatch('getJobs')
   }
 }
 </script>

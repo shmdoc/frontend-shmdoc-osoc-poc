@@ -10,7 +10,7 @@
           v-on:click="changeSelected(column)">{{column.attributes.name}}</h3>
       </div>
     </div>
-    <h1>Analysis for {{this.name}}</h1>
+    <h1>Analysis for "{{this.name}}"</h1>
     <div v-if="running">
       <h3>Job is still running</h3>
       <button v-on:click="refresh">Refresh</button>
@@ -38,7 +38,7 @@ export default {
   },
   methods: {
     fetch_columns() {
-      fetch('/schema-analysis-jobs/' + this.$route.params.id + '/columns')
+      fetch('/schema-analysis-jobs/' + this.$route.params.id + '/columns?page[size]=100')
           .then(response => response.json())
           .then(response => {
             if (response.data.length === 0) {
@@ -61,7 +61,7 @@ export default {
       this.open = false
     },
     refresh() {
-      fetch('/schema-analysis-jobs/' + this.$route.params.id + '/columns')
+      fetch('/schema-analysis-jobs/' + this.$route.params.id + '/columns?page[size]=100')
           .then(response => response.json())
           .then(response => {
             if (response.data.length === 0) {
@@ -119,4 +119,8 @@ div {
   box-shadow: 0 3px 12px 0 rgba(0, 0, 0, 0.2), 0 1px 15px 0 rgba(0, 0, 0, 0.19);
   cursor: pointer;
 }
+h1 {
+  font-weight: 550;
+}
+
 </style>

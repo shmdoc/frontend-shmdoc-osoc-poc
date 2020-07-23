@@ -14,7 +14,7 @@
         </tr>
         <tr>
           <th>datatype</th>
-          <td>{{attributes.datatype}}</td>
+          <td>{{attributes["data-type"]}}</td>
         </tr>
         <tr>
           <th>quantity kind</th>
