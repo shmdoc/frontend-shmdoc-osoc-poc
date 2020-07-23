@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2 v-if="source">Source "{{source.attributes.name}}"</h2>
+    <h1 v-if="source">Source "{{source.attributes.name}}"</h1>
     <JobListItem v-for="job in jobs" v-bind:key='job.id' :job='job'>{{job}}</JobListItem>
   </div>
 </template>

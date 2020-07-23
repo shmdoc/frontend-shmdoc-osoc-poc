@@ -10,7 +10,7 @@
           v-on:click="changeSelected(column)">{{column.attributes.name}}</h3>
       </div>
     </div>
-    <h1>Analysis for {{this.name}}</h1>
+    <h1>Analysis for "{{this.name}}"</h1>
     <div v-if="running">
       <h3>Job is still running</h3>
       <button v-on:click="refresh">Refresh</button>
