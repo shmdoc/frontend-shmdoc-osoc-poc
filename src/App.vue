@@ -58,4 +58,12 @@ body {
   height: 75px;
   background-color: black;
 }
+button {
+  border-radius: 3px;
+  border: 1px solid #333;
+  padding: 3px;
+  cursor: pointer;
+  background-color: white;
+  height: 30px;
+}
 </style>
