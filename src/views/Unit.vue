@@ -1,6 +1,9 @@
 <template>
+
   <div>
+
     <div class="container">
+<!--      Info about the unit itself-->
       <div v-if="unit">
         <!-- Information about the unit itself -->
         <h1><a v-bind:href=unit.attributes.uri>{{unit.attributes.name}} ({{unit.attributes.notation}})</a></h1>
@@ -9,14 +12,15 @@
       <div v-else>
         <!-- Show something when no unit found (looks better than no title) -->
         <h1>{{this.$route.params.id}}</h1>
+        <p>Warning: No unit with id {{this.$route.params.id}} found</p>
       </div>
     </div>
+
+<!--    Info about the columns containing this unit-->
     <div class="tablecontainer">
       <table>
-<!--        <div v-for="column in columns" v-bind:key='column.id' :column='column'>-->
           <tr><td>Column</td><td>Job</td><td>Source</td></tr>
           <ColumnListItem v-for="column in columns" v-bind:key='column.id' :column='column'>{{column}}</ColumnListItem>
-<!--        </div>-->
       </table>
     </div>
   </div>
@@ -60,7 +64,6 @@
       }
     },
     mounted: function () {
-      console.log("Page accessed for id " + this.$route.params.id)
       this.fetchUnit(this.$route.params.id)
       this.fetch_columns();
     }

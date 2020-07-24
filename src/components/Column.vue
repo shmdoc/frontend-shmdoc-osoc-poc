@@ -232,7 +232,17 @@ export default {
 //          .catch(error => console.log(error))
     },
     showRelated(unit) {
-      // Unit should be the unit id (or you have to change the code below to unit.id)
+      // unit should be unit.id, but is currently unit.name
+      // This line should be replaced (or removed) once there is a more efficient way to get the unit.id
+      console.log("Showing related for " + unit)
+      this.units.forEach(unit_ => {
+        if (unit_.attributes.name === unit) {
+          console.log("ID for " + unit + " is " + unit_.id)
+          unit = unit_.id
+          return
+        }
+      })
+
       router.push({ name: 'unit', params: {id: unit} })
     }
   },
