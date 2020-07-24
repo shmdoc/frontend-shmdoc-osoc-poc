@@ -29,7 +29,9 @@
           <td>
             <div class="quantityKind">
               <span>{{attributes.unit}}</span>
-              <button v-on:click="showRelated">Show Related</button>
+<!--              TODO: Why does the if not work? :-(-->
+<!--              <button v-if="unit" v-on:click="showRelated(attributes.unit)">Show Related</button> -->
+              <button v-on:click="showRelated(attributes.unit)">Show Related</button>
             </div>
           </td>
         </tr>
@@ -171,6 +173,7 @@
 
 <script>
 import { mapState } from 'vuex'
+import router from "../router";
 
 export default {
   props: ['column'],
@@ -228,8 +231,9 @@ export default {
 //          .then(response => console.log(response))
 //          .catch(error => console.log(error))
     },
-    showRelated() {
-      alert('Not yet implemented')
+    showRelated(unit) {
+      // Unit should be the unit id (or you have to change the code below to unit.id)
+      router.push({ name: 'unit', params: {id: unit} })
     }
   },
 }
