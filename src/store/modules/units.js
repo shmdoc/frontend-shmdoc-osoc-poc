@@ -26,9 +26,5 @@ export const actions = {
 export const getters = {
   getUnitById: state => id => {
     return state.units.find(unit => unit.id === id)
-  },
-  getUnitByName: state => name => {
-    // Why you no work? :-(
-    return state.units.find(unit => unit.name === name)
   }
 }
