@@ -24,8 +24,8 @@
           <th>unit</th>
           <td>
             <div class="unitLayout">
-              <span>{{attributes.unit}}</span>
-              <button v-on:click="showRelated(attributes.unit)">Show Related</button>
+              <span class="left-side">{{attributes.unit}}</span>
+              <button class="right-side-button" v-on:click="showRelated(attributes.unit)">Show Related</button>
             </div>
           </td>
         </tr>
@@ -260,19 +260,39 @@
 </script>
 
 <style scoped>
-.tablecontainer {
-  margin: 8px;
-}
-table, th, td {
-  border: 1px solid black;
-  border-collapse: collapse;
-}
-th, td {
-  padding: 5px;
-  text-align: left;
-}
-.quantityKind {
-  display: flex;
-  justify-content: flex-end;
-}
+  .tablecontainer {
+    margin: 8px;
+  }
+
+  table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+  }
+
+  th, td {
+    padding: 5px;
+    text-align: left;
+  }
+
+
+  .unitLayout {
+    display: flex;
+    /*justify-content: flex-end;*/
+    text-align: left;
+    width: 100%;
+  }
+
+  .right-side-button {
+    float: left;
+    width: 50%;
+    /*width: fit-content;*/
+    /*display: flex;*/
+    /*justify-content: flex-end;*/
+    /*display: inline-block;*/
+  }
+
+  .left-side {
+    float: right;
+    width: 75%;
+  }
 </style>
