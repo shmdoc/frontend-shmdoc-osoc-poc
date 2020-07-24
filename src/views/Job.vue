@@ -23,6 +23,7 @@
 import Column from '@/components/Column.vue'
 
 export default {
+  props: ['selectedColumn'],
   components: {
     Column
   },
@@ -30,7 +31,6 @@ export default {
     return {
       job: null,
       columns: [],
-      selectedColumn: null,
       running: false,
       open: false,
       name: ''
