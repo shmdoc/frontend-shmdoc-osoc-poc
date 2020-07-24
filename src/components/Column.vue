@@ -21,13 +21,17 @@
           <td>
             <div class="quantityKind">
               <span>{{attributes["quantity-kind"]}}</span>
-              <button v-on:click="showRelated">Show Related</button>
             </div>
           </td>
         </tr>
         <tr>
           <th>unit</th>
-          <td>{{attributes.unit}}</td>
+          <td>
+            <div class="quantityKind">
+              <span>{{attributes.unit}}</span>
+              <button v-on:click="showRelated">Show Related</button>
+            </div>
+          </td>
         </tr>
         <tr>
           <th>record count</th>
