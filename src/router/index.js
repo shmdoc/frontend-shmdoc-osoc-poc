@@ -7,6 +7,7 @@ import NewJob from '../views/NewJob.vue'
 import RunningJobs from '../views/RunningJobs.vue'
 import Sources from '../views/Sources.vue'
 import Source from '../views/Source.vue'
+import Unit from '../views/Unit.vue'
 
 Vue.use(VueRouter)
 
@@ -47,6 +48,12 @@ Vue.use(VueRouter)
     path: '/sources/:id',
     name: 'source',
     component: Source,
+    props: true
+  },
+  {
+    path: '/units/:id',
+    name: 'unit',
+    component: Unit,
     props: true
   }
 ]

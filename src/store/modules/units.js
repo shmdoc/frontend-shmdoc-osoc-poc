@@ -12,16 +12,19 @@ export const mutations = {
 }
 
 export const actions = {
-  fetch_units({ commit }) {
+  fetch_units({commit}) {
     commit('CLEAR_UNITS')
     fetch('/units')
-        .then(response => response.json())
-        .then(response => {
-          response.data.forEach(unit => commit('ADD_UNIT', unit))
-        })
-        .catch(error => console.log(error))
+      .then(response => response.json())
+      .then(response => {
+        response.data.forEach(unit => commit('ADD_UNIT', unit))
+      })
+      .catch(error => console.log(error))
   }
 }
 
 export const getters = {
+  getUnitById: state => id => {
+    return state.units.find(unit => unit.id === id)
+  }
 }
