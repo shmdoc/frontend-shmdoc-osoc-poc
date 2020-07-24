@@ -24,8 +24,7 @@
           <th>unit</th>
           <td>
             <div class="unitLayout">
-              <span v-if="attributes.unit">{{attributes.unit.name}}</span>
-              <span v-else>No unit assigned</span>
+              <span>{{attributes.unit}}</span>
               <button v-on:click="showRelated(attributes.unit)">Show Related</button>
             </div>
           </td>
