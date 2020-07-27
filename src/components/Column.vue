@@ -18,16 +18,16 @@
         </tr>
         <tr>
           <th>quantity kind</th>
-          <td>
-            <div class="quantityKind">
-              <span>{{attributes["quantity-kind"]}}</span>
-              <button v-on:click="showRelated">Show Related</button>
-            </div>
-          </td>
+          <td>{{attributes["quantity-kind"]}}</td>
         </tr>
         <tr>
           <th>unit</th>
-          <td>{{attributes.unit}}</td>
+          <td>
+            <div class="unitLayout">
+              <span class="left-side">{{attributes.unit}}</span>
+              <button class="right-side-button" v-on:click="showRelated(attributes.unit)">Show Related</button>
+            </div>
+          </td>
         </tr>
         <tr>
           <th>record count</th>
@@ -112,6 +112,14 @@
               <option v-for="unit in units" :key="unit.id" :value="unit.attributes.name"/>
             </datalist>
           </td>
+          <!--          <td>-->
+          <!--            <span v-if="!units || !units.length">-->
+          <!--              No units to choose from-->
+          <!--            </span>-->
+          <!--            <select v-else v-model="attributes.unit" list="units">-->
+          <!--              <option v-for="unit in units" :value="unit" :key="unit">{{unit.attributes.name}}</option>-->
+          <!--            </select>-->
+          <!--          </td>-->
         </tr>
         <tr>
           <th>record count</th>
@@ -166,45 +174,46 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+  import {mapState} from 'vuex'
+  import router from "../router";
 
-export default {
-  props: ['column'],
-  data() {
-    return {
-      attributes: this.column.attributes,
-      editing: false,
-    }
-  },
-  computed: {
-    ...mapState({
-      units: state => state.units.units
-    }),
-  },
-  methods: {
-    edit() {
-      this.editing = true
-      this.backup = JSON.stringify(this.attributes) // to make a copy
-    },
-    cancel() {
-      this.editing = false
-      this.attributes = JSON.parse(this.backup)
-    },
-    save() {
-      this.editing = false
-
-      //get id of unittype
-      let id = null
-      this.units.forEach(unit => {
-        if (unit.attributes.name === this.attributes.unit) {
-          id = unit.id
-        }
-      })
-      if (id) {
-        console.log(id)
-      }else{
-        alert('No valid source')
+  export default {
+    props: ['column'],
+    data() {
+      return {
+        attributes: this.column.attributes,
+        editing: false,
       }
+    },
+    computed: {
+      ...mapState({
+        units: state => state.units.units
+      }),
+    },
+    methods: {
+      edit() {
+        this.editing = true
+        this.backup = JSON.stringify(this.attributes) // to make a copy
+      },
+      cancel() {
+        this.editing = false
+        this.attributes = JSON.parse(this.backup)
+      },
+      save() {
+        this.editing = false
+
+        //get id of unittype
+        let id = null
+        this.units.forEach(unit => {
+          if (unit.attributes.name === this.attributes.unit) {
+            id = unit.id
+          }
+        })
+        if (id) {
+          console.log(id)
+        } else {
+          alert('No valid source')
+        }
 
 //      let data = {data: {
 //                          type: "columns",
@@ -223,28 +232,69 @@ export default {
 //          .then(response => response.json())
 //          .then(response => console.log(response))
 //          .catch(error => console.log(error))
+      },
+      showRelated(unit) {
+        // unit should be unit.id, but is currently unit.name
+        // This line should be replaced (or removed) once there is a more efficient way to get the unit.id
+        console.log("Showing related for " + unit)
+        this.units.forEach(unit_ => {
+          if (unit_.attributes.name === unit) {
+            console.log("ID for " + unit + " is " + unit_.id)
+            unit = unit_.id
+            return
+          }
+        })
+
+        router.push({name: 'unit', params: {id: unit}})
+      },
+      showRelated() {
+        alert('Not yet implemented')
+      },
     },
-    showRelated() {
-      alert('Not yet implemented')
-    },
-  },
-}
+    mounted: function () {
+      var unit_list = this.$store.units // TODO: Is this the right way to get unit list from the store?
+      if (!unit_list || !unit_list.length) {
+        // In case it's for some reason not loaded from jobs, do it now
+        this.$store.dispatch('fetch_units')
+      }
+    }
+  }
 </script>
 
 <style scoped>
-.tablecontainer {
-  margin: 8px;
-}
-table, th, td {
-  border: 1px solid black;
-  border-collapse: collapse;
-}
-th, td {
-  padding: 5px;
-  text-align: left;
-}
-.quantityKind {
-  display: flex;
-  justify-content: flex-end;
-}
+  .tablecontainer {
+    margin: 8px;
+  }
+
+  table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+  }
+
+  th, td {
+    padding: 5px;
+    text-align: left;
+  }
+
+
+  .unitLayout {
+    display: flex;
+    /*justify-content: flex-end;*/
+    text-align: left;
+    width: 100%;
+  }
+
+  .right-side-button {
+    float: left;
+    width: 50%;
+    /*width: fit-content;*/
+    /*display: flex;*/
+    /*justify-content: flex-end;*/
+    /*display: inline-block;*/
+  }
+
+  .left-side {
+    float: right;
+    width: 75%;
+  }
 </style>

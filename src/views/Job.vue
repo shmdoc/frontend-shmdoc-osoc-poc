@@ -23,6 +23,7 @@
 import Column from '@/components/Column.vue'
 
 export default {
+  props: ['selectedColumn'],
   components: {
     Column
   },
@@ -30,7 +31,6 @@ export default {
     return {
       job: null,
       columns: [],
-      selectedColumn: null,
       running: false,
       open: false,
       name: ''
@@ -45,7 +45,10 @@ export default {
               this.running = true
             }else {
               response.data.forEach(column => this.columns.push(column))
-              this.selectedColumn = this.columns[0]
+              if(!this.selectedColumn) {
+                // if required so selectedColumn can be set by the page you're being redirected from
+                this.selectedColumn = this.columns[0]
+              }
             }
           })
           .catch(error => console.log(error))
