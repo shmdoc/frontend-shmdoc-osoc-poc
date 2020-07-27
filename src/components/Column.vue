@@ -107,7 +107,7 @@
         <tr>
           <th>unit</th>
           <td>
-            <input type="text" list="units" v-model="unit.attributes.name"/>
+            <input v-if="unit" type="text" list="units" v-model="unit.attributes.name"/>
             <datalist id="units">
               <option v-for="unit in units" :key="unit.id" :value="unit.attributes.name"/>
             </datalist>
@@ -182,7 +182,9 @@
     data() {
       return {
         attributes: this.column.attributes,
-        unit: null,
+        unit: {
+          attributes: {}
+        },
         editing: false,
       }
     },
