@@ -25,7 +25,7 @@
           <td>
             <div class="unitLayout">
               <span v-if="unit" class="left-side">{{unit.attributes.name}}</span>
-              <button class="right-side-button" v-on:click="showRelated(unit)">Show Related</button>
+              <button v-if="unit" class="right-side-button" v-on:click="showRelated(unit.attributes.name)">Show Related</button>
             </div>
           </td>
         </tr>
