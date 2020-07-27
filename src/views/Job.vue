@@ -119,8 +119,9 @@ div {
   justify-content: center;
 }
 .column-card {
-  padding: 10px;
+  padding: 20px;
   transition: all 0.2s linear;
+  margin: 5px 0 5px 0;
 }
 .column-card:hover {
   transform: scale(1.01);
