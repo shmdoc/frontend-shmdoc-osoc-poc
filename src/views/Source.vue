@@ -47,9 +47,6 @@ export default {
 div {
   text-align: center;
 }
-h1 {
-  font-weight: 550;
-}
 .container {
   display: flex;
   justify-content: center;
@@ -57,5 +54,8 @@ h1 {
 }
 button {
   margin-left: 20px;
+}
+h1 {
+  font-weight: 550;
 }
 </style>

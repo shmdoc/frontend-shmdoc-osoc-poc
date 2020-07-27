@@ -6,7 +6,7 @@
 <!--      Info about the unit itself-->
       <div v-if="unit">
         <!-- Information about the unit itself -->
-        <h1><a v-bind:href=unit.attributes.uri>{{unit.attributes.name}} ({{unit.attributes.notation}})</a></h1>
+        <h1 class="pagetitle"><a v-bind:href=unit.attributes.uri>{{unit.attributes.name}} ({{unit.attributes.notation}})</a></h1>
         <p>{{unit.attributes.definition}}</p>
       </div>
       <div v-else>
@@ -74,42 +74,30 @@
   div {
     text-align: center;
   }
-
-  h1 {
-    font-weight: 550;
-  }
-
   .container {
     display: flex;
     justify-content: center;
     align-items: center;
   }
-
   button {
     margin-left: 20px;
   }
-
-
   .tablecontainer {
     margin: 8px;
   }
-
   table, th, td {
     border: 1px solid black;
     border-collapse: collapse;
   }
-
   table {
     width: 80%;
     margin-left:auto;
     margin-right:auto;
   }
-
   th, td {
     padding: 5px;
     text-align: left;
   }
-
   .quantityKind {
     display: flex;
     justify-content: flex-end;

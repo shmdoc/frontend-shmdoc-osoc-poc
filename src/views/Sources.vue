@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>SOURCES</h1>
+    <h1 class="pagetitle">SOURCES</h1>
     <SourcesList/>
   </div>
 </template>
@@ -17,8 +17,5 @@ export default {
 <style scoped>
 div {
   text-align: center;
-}
-h1 {
-  font-weight: 550;
 }
 </style>
