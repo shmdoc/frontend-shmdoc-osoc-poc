@@ -2,7 +2,7 @@
   <div>
     <h3>{{attributes.name}}</h3>
     <div v-if="!editing" class="tablecontainer">
-      <button v-on:click="edit">Edit</button>
+      <button v-on:click="edit">Edit Column</button>
       <table style="width: 100%">
         <tr>
           <th>description</th>
@@ -282,20 +282,16 @@
     border: 1px solid black;
     border-collapse: collapse;
   }
-
   th, td {
     padding: 5px;
     text-align: left;
   }
-
-
   .unitLayout {
     display: flex;
     /*justify-content: flex-end;*/
     text-align: left;
     width: 100%;
   }
-
   .right-side-button {
     float: left;
     width: 50%;
@@ -304,9 +300,11 @@
     /*justify-content: flex-end;*/
     /*display: inline-block;*/
   }
-
   .left-side {
     float: right;
     width: 75%;
+  }
+  button {
+    margin-bottom: 10px;
   }
 </style>
