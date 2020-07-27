@@ -19,7 +19,7 @@
 <!--    Info about the columns containing this unit-->
     <div class="tablecontainer">
       <table>
-          <tr><td>Column</td><td>Job</td><td>Source</td></tr>
+          <tr><td>Source</td><td>Analysis time</td><td>Field name</td></tr>
           <ColumnListItem v-for="column in columns" v-bind:key='column.id' :column='column'>{{column}}</ColumnListItem>
       </table>
     </div>
