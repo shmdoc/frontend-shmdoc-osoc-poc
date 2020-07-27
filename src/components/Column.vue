@@ -247,9 +247,6 @@
 
         router.push({name: 'unit', params: {id: unit}})
       },
-      showRelated() {
-        alert('Not yet implemented')
-      },
     },
     mounted: function () {
       var unit_list = this.$store.units // TODO: Is this the right way to get unit list from the store?
