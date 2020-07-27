@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>NEW ANALYSIS</h1>
+    <h1 class="pagetitle">NEW ANALYSIS</h1>
     <FileUploader :source="this.source"/>
   </div>
 </template>
@@ -19,8 +19,5 @@ export default {
 <style scoped>
 div {
   text-align: center;
-}
-h1 {
-  font-weight: 550;
 }
 </style>

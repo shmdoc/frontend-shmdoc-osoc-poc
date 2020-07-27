@@ -58,6 +58,10 @@ body {
   height: 75px;
   background-color: black;
 }
+.pagetitle {
+  font-weight: 550;
+  text-transform: uppercase;
+}
 button {
   border-radius: 3px;
   border: 1px solid #333;

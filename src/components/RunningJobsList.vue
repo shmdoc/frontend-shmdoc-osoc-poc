@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h3 v-if="runningJobs.length === 0">No analyses running, or they are starting</h3>
+    <h3 v-if="runningJobs.length === 0 && finishedJobs.length === 0">No analyses running, or they are starting</h3>
     <div v-for="job in runningJobs" :key="job.id">
       <div v-if="!job.finished">
         <div class="wrapper">
@@ -12,10 +12,10 @@
           <button v-on:click="stopJob(job)">Stop</button>
         </div>
       </div>
-      <router-link v-for="job in jobs" :key="job.id" :to="{ name: 'job', params: {id: job.id} }" class="link">
-        <h4 class="finished">{{job.id}}</h4>
-      </router-link>
-      </div>
+    </div>
+    <router-link v-for="job in finishedJobs" :key="job.id" :to="{ name: 'job', params: {id: job.id} }" class="link">
+      <h4 class="finished">{{job.id}}</h4>
+    </router-link>
     </div>
 </template>
 
@@ -34,7 +34,7 @@ export default {
   },
   computed: {
     finishedJobs() {
-      return this.jobs.filter(j => j.running)
+      return this.jobs.filter(j => 'finished' in j)
     },
     ...mapState({
       runningJobs: state => state.jobs.runningJobs,

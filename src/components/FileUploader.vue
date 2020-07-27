@@ -18,7 +18,7 @@
         <datalist id="source">
           <option v-for="source in sources" :key="source.id" :value="source.attributes.name"/>
         </datalist>
-        <button v-if="files.length > 0" v-on:click="uploadFiles">Upload Job</button>
+        <button v-if="files.length > 0" v-on:click="uploadFiles">Upload File(s)</button>
       </div>
 
       <div>
