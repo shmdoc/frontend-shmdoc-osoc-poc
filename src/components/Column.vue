@@ -226,7 +226,7 @@ export default {
     },
     showRelated() {
       alert('Not yet implemented')
-    }
+    },
   },
 }
 </script>
