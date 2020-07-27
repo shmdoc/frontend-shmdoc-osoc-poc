@@ -12,14 +12,14 @@
       <div v-else>
         <!-- Show something when no unit found (looks better than no title) -->
         <h1>{{this.$route.params.id}}</h1>
-        <p>Warning: No unit with id {{this.$route.params.id}} found</p>
+        <h2 class="pagetitle">No unit with id {{this.$route.params.id}} found</h2>
       </div>
     </div>
 
 <!--    Info about the columns containing this unit-->
-    <div class="tablecontainer">
+    <div v-if="unit" class="tablecontainer">
       <table>
-          <tr><td>Source</td><td>Analysis time</td><td>Field name</td></tr>
+          <tr><td>Source</td><td>Time of analysis</td><td>Field name</td></tr>
           <ColumnListItem v-for="column in columns" v-bind:key='column.id' :column='column'>{{column}}</ColumnListItem>
       </table>
     </div>
