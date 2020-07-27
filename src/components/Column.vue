@@ -54,7 +54,7 @@
           <td>{{attributes.median}}</td>
         </tr>
         <tr>
-          <th>common values</th>
+          <th>common values (max 5)</th>
           <td>
             <table v-if="attributes['common-values']" style="width: 100%">
               <tr>
@@ -146,7 +146,7 @@
           <td>{{attributes.median}}</td>
         </tr>
         <tr>
-          <th>common values</th>
+          <th>common values (max 5)</th>
           <td>
             <table v-if="attributes['common-values']" style="width: 100%">
               <tr>
@@ -246,9 +246,8 @@
         })
 
         router.push({name: 'unit', params: {id: unit}})
-      }
+      },
     },
-
     mounted: function () {
       var unit_list = this.$store.units // TODO: Is this the right way to get unit list from the store?
       if (!unit_list || !unit_list.length) {

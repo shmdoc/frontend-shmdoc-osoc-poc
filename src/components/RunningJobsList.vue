@@ -5,15 +5,15 @@
       <div v-if="!job.finished">
         <div class="wrapper">
           <div class="runningJobItem">
-            <h4 class="running">{{job.job.id}}</h4>
+            <h4 class="running">{{job.id}}</h4>
             <LoadAnimation/>
           </div>
           <span>{{created(job)}}</span>
           <button v-on:click="stopJob(job)">Stop</button>
         </div>
       </div>
-      <router-link v-else :to="{ name: 'job', params: {id: job.job.id} }" class="link">
-        <h4 class="finished">{{job.job.id}}</h4>
+      <router-link v-for="job in jobs" :key="job.id" :to="{ name: 'job', params: {id: job.id} }" class="link">
+        <h4 class="finished">{{job.id}}</h4>
       </router-link>
       </div>
     </div>
@@ -33,13 +33,17 @@ export default {
     }
   },
   computed: {
+    finishedJobs() {
+      return this.jobs.filter(j => j.running)
+    },
     ...mapState({
-      runningJobs: state => state.jobs.runningJobs
+      runningJobs: state => state.jobs.runningJobs,
+      jobs: state => state.jobs.jobs
     })
   },
   methods: {
     created(job) {
-      return moment(job.job.attributes.created).format('lll')
+      return moment(job.attributes.created).format('lll')
     },
     stopJob(job) {
       this.$store.dispatch('stopJob', job)

@@ -16,28 +16,30 @@ export const mutations = {
   ADD_RUNNING_JOB(state, job){
     let found = false
     state.runningJobs.forEach(runningJob => {
-      if (runningJob.job.id === job.id) {
+      if (runningJob.id === job.id) {
         found = true
       }
     })
     if (!found) {
-      state.runningJobs.push({finished: false, job })
+      job.finished = false
+      state.runningJobs.push(job)
     }
   },
   START_JOB(state, job){
-    state.runningJobs.push({finished: false, job })
+    job.finished = false
+    state.runningJobs.push(job)
   },
   FINISH_JOB(state, job){
     state.runningJobs = state.runningJobs.filter(j => j.id !== job.id)
     state.runningJobs.forEach(obj => {
-      if (obj.job.id === job.id) {
+      if (obj.id === job.id) {
         Vue.set(obj, 'finished', true)
       }
     })
     state.jobs.push(job)
   },
   STOP_JOB(state, job){
-    state.runningJobs = state.runningJobs.filter(runningJob => runningJob.job.id !== job.job.id)
+    state.runningJobs = state.runningJobs.filter(runningJob => runningJob.id !== job.id)
   },
 }
 
@@ -115,7 +117,7 @@ export const actions = {
         .catch(error => console.log(error))
   },
   stopJob({ commit }, job) {
-    fetch('/schema-analysis-jobs/' + job.job.id, {
+    fetch('/schema-analysis-jobs/' + job.id, {
           method: 'DELETE',
         })
         .then(() => {
