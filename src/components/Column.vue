@@ -25,7 +25,7 @@
           <td>
             <div class="unitLayout">
               <span v-if="unit" class="left-side">{{unit.attributes.name}}</span>
-              <button v-if="unit" class="right-side-button" v-on:click="showRelated(unit.attributes.name)">Show Related</button>
+              <button v-if="unit.attributes.name" class="right-side-button" v-on:click="showRelated(unit.attributes.name)">Show Related</button>
             </div>
           </td>
         </tr>
@@ -251,7 +251,6 @@
             return
           }
         })
-
         router.push({name: 'unit', params: {id: unit}})
       },
     },
