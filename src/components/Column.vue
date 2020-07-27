@@ -208,7 +208,7 @@
         //get id of unittype
         let unitId = null
         this.units.forEach(unit => {
-          if (unit.attributes.name === this.unit) {
+          if (unit.attributes.name === this.unit.attributes.name) {
             unitId = unit.id
           }
         })
