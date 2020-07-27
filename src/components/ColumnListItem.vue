@@ -93,7 +93,7 @@
 
       redirectColumn(){
         // Redirect to the column clicked on
-        this.$router.push({name: 'job', params: { id: this.job.id, selectedColumn: this.column }})
+        this.$router.push({name: 'job', params: { id: this.job.id, preSelectedColumn: this.column }})
       }
     },
     mounted: function () {
