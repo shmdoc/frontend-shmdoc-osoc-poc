@@ -54,7 +54,7 @@
           <td>{{attributes.median}}</td>
         </tr>
         <tr>
-          <th>common values</th>
+          <th>common values (max 5)</th>
           <td>
             <table v-if="attributes['common-values']" style="width: 100%">
               <tr>
@@ -146,7 +146,7 @@
           <td>{{attributes.median}}</td>
         </tr>
         <tr>
-          <th>common values</th>
+          <th>common values (max 5)</th>
           <td>
             <table v-if="attributes['common-values']" style="width: 100%">
               <tr>
