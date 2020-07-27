@@ -24,8 +24,8 @@
           <th>unit</th>
           <td>
             <div class="unitLayout">
-              <span class="left-side">{{attributes.unit}}</span>
-              <button class="right-side-button" v-on:click="showRelated(attributes.unit)">Show Related</button>
+              <span v-if="unit" class="left-side">{{unit.attributes.name}}</span>
+              <button class="right-side-button" v-on:click="showRelated(unit)">Show Related</button>
             </div>
           </td>
         </tr>
@@ -107,7 +107,7 @@
         <tr>
           <th>unit</th>
           <td>
-            <input type="text" list="units" v-model="attributes.unit"/>
+            <input type="text" list="units" v-model="unit.attributes.name"/>
             <datalist id="units">
               <option v-for="unit in units" :key="unit.id" :value="unit.attributes.name"/>
             </datalist>
@@ -182,6 +182,7 @@
     data() {
       return {
         attributes: this.column.attributes,
+        unit: null,
         editing: false,
       }
     },
@@ -203,35 +204,40 @@
         this.editing = false
 
         //get id of unittype
-        let id = null
+        let unitId = null
         this.units.forEach(unit => {
-          if (unit.attributes.name === this.attributes.unit) {
-            id = unit.id
+          if (unit.attributes.name === this.unit) {
+            unitId = unit.id
           }
         })
-        if (id) {
-          console.log(id)
-        } else {
-          alert('No valid source')
-        }
 
-//      let data = {data: {
-//                          type: "columns",
-//                          attributes: this.attributes,
-//                          id: this.column.id
-//                        }
-//      }
-//      data.attributes = this.attributes
-//      fetch('/columns/' + this.column.id, {
-//            method: 'PATCH',
-//            headers: {
-//              'Content-Type': 'application/vnd.api+json'
-//            },
-//          body: JSON.stringify(data)
-//          })
-//          .then(response => response.json())
-//          .then(response => console.log(response))
-//          .catch(error => console.log(error))
+        const payload = {
+          data: {
+            type: "columns",
+            attributes: this.attributes,
+            id: this.column.id
+          }
+        }
+        delete payload.data.attributes.uri
+
+        if (unitId) {
+          payload.data.relationships = {
+            unit: {
+              data: {
+                id: unitId,
+                type: 'units'
+              }
+            }
+          }
+        }
+        fetch('/columns/' + this.column.id, {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/vnd.api+json' },
+          body: JSON.stringify(payload)
+        })
+          .then(response => response.json())
+          .then(response => console.log(response))
+          .catch(error => console.log(error))
       },
       showRelated(unit) {
         // unit should be unit.id, but is currently unit.name
@@ -255,6 +261,14 @@
         // In case it's for some reason not loaded from jobs, do it now
         this.$store.dispatch('fetch_units')
       }
+      fetch('/columns/' + this.column.id + '/unit')
+        .then(res => res.json())
+        .then(res => {
+          console.log("Fetched unit:", res)
+          if (res.data) {
+            this.unit = res.data;
+          }
+        })
     }
   }
 </script>
