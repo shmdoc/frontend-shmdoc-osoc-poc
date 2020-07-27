@@ -3,29 +3,37 @@
   <tr class="large-hover" @click="redirectColumn()">
 
     <th>
-      {{column.attributes.name}}
-    </th>
-
-    <td>
-      <div v-if="job_name">
-        {{job_name}}
-      </div>
-      <div v-else-if="job">
-        {{job.id}}
-      </div>
-      <div v-else>Waiting for job...</div>
-    </td>
-
-    <td>
       <div v-if="source">
         {{source.attributes.name}}
       </div>
       <div v-else>Waiting for source...</div>
+    </th>
+
+    <!--    Uncomment this if you want to show the filename-->
+    <!--    <td>-->
+    <!--      <div v-if="job_name">-->
+    <!--        {{job_name}}-->
+    <!--      </div>-->
+    <!--      <div v-else-if="job">-->
+    <!--        {{job.id}}-->
+    <!--      </div>-->
+    <!--      <div v-else>Waiting for job...</div>-->
+    <!--    </td>-->
+    <td>
+      <div v-if="job">
+        {{ created }}
+      </div>
+      <div v-else>Waiting for job...</div>
+    </td>
+    <td>
+      {{column.attributes.name}}
     </td>
   </tr>
 </template>
 
 <script>
+
+  import moment from "moment";
 
   export default {
     props: ['column'],
@@ -37,7 +45,11 @@
       }
     },
 
-    computed: {},
+    computed: {
+      created() {
+        return moment(this.job.attributes.created).format('lll')
+      },
+    },
 
     methods: {
 
@@ -91,9 +103,9 @@
           .catch(error => console.log(error))
       },
 
-      redirectColumn(){
+      redirectColumn() {
         // Redirect to the column clicked on
-        this.$router.push({name: 'job', params: { id: this.job.id, selectedColumn: this.column }})
+        this.$router.push({name: 'job', params: {id: this.job.id, selectedColumn: this.column}})
       }
     },
     mounted: function () {
@@ -104,7 +116,7 @@
 
 <style scoped>
   .large-hover:hover {
-  transform: scale(1.01);
-  box-shadow: 0 3px 12px 0 rgba(0, 0, 0, 0.2), 0 1px 12px 0 rgba(0, 0, 0, 0.2);
-}
+    transform: scale(1.01);
+    box-shadow: 0 3px 12px 0 rgba(0, 0, 0, 0.2), 0 1px 12px 0 rgba(0, 0, 0, 0.2);
+  }
 </style>
