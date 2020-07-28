@@ -7,7 +7,6 @@
       <div class="navigation">
         <router-link :to="{ name: 'new-job' }" class="headerlink">New Analysis</router-link>
         <router-link :to="{ name: 'running-jobs' }" class="headerlink">Running Analyses</router-link>
-        <router-link :to="{ name: 'historic-jobs' }" class="headerlink">Historic Analyses</router-link>
         <router-link :to="{ name: 'sources' }" class="headerlink">sources</router-link>
       </div>
     </div>
