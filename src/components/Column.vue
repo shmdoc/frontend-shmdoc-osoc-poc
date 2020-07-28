@@ -237,16 +237,13 @@
           headers: { 'Content-Type': 'application/vnd.api+json' },
           body: JSON.stringify(payload)
         })
-          .then(response => console.log(response))
           .catch(error => console.log(error))
       },
       showRelated(unit) {
         // unit should be unit.id, but is currently unit.name
         // This line should be replaced (or removed) once there is a more efficient way to get the unit.id
-        console.log("Showing related for " + unit)
         this.units.forEach(unit_ => {
           if (unit_.attributes.name === unit) {
-            console.log("ID for " + unit + " is " + unit_.id)
             unit = unit_.id
             return
           }
@@ -255,7 +252,7 @@
       },
     },
     mounted: function () {
-      var unit_list = this.$store.units // TODO: Is this the right way to get unit list from the store?
+      let unit_list = this.$store.units
       if (!unit_list || !unit_list.length) {
         // In case it's for some reason not loaded from jobs, do it now
         this.$store.dispatch('fetch_units')
@@ -263,11 +260,11 @@
       fetch('/columns/' + this.column.id + '/unit')
         .then(res => res.json())
         .then(res => {
-          console.log("Fetched unit:", res)
           if (res.data) {
             this.unit = res.data;
           }
         })
+        .catch(error => console.log(error))
     }
   }
 </script>

@@ -64,7 +64,6 @@
       fetchJobName(job) {
         // Fetches the filename (used because more readable than the job uuid)
         let file_url = job.relationships.file.links.related
-        // console.log(file_url)
         fetch(file_url)
           .then(response => response.json())
           .then(response => this.job_name = response.data.attributes.filename)
@@ -74,13 +73,11 @@
       fetchJob(job_id) {
         // Given a job id, get the json job object
         let job_url = '/schema-analysis-jobs/' + job_id
-        // console.log(job_url)
         fetch(job_url)
           .then(response => response.json())
           .then(
             response => {
               this.job = response.data
-              // console.log(this.job)
               this.fetchJobName(this.job)
               this.fetchSource(this.job)
             }
@@ -91,7 +88,6 @@
 
         // Determine the job id
         let job_url = '/columns/' + column_id + '/column'
-        // console.log(job_url)
         fetch(job_url)
           .then(response => response.json())
           .then(response => {
