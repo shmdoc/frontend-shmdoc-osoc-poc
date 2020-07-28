@@ -33,7 +33,7 @@ to run the frontend clone the repository:
 ```bash
 git clone https://github.com/shmdoc/frontend-shmdoc-osoc-poc.git
 ```
-install [vue](https://vuejs.org/):
+install [Vue](https://vuejs.org/):
 ```bash
 npm install vue
 ```
@@ -46,3 +46,11 @@ and run the the development server:
 npm run serve
 ```
 now the frontend is available on port 8080 and you can start developing.
+
+## Project structure
+
+In this project we use [Vue](https://vuejs.org/) in combination with [Vuex](https://vuex.vuejs.org/) and the [Vue router](https://router.vuejs.org/).
+
+## Comminication with backend
+
+To communicate with the backend we use the [JSON API specifications](https://jsonapi.org/). You can find some examples in the store modules.
