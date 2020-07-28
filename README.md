@@ -10,6 +10,8 @@ frontend:
     image: shmdoc/frontend-shmdoc-osoc-poc
     links:
       - identifier:backend
+    ports:
+      - 80:80
 ```
 Now you will be able to acces the frontend on port 80
 
