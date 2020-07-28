@@ -10,8 +10,6 @@ frontend:
     image: shmdoc/frontend-shmdoc-osoc-poc
     links:
       - identifier:backend
-    ports:
-      - 80:80
 ```
 Now you will be able to acces the frontend on port 80
 
@@ -52,6 +50,7 @@ now the frontend should be available on port 8080 and you can start developing.
 ## Project structure
 
 In this project we use [Vue](https://vuejs.org/) in combination with [Vuex](https://vuex.vuejs.org/) and the [Vue router](https://router.vuejs.org/).
+The 'pages' can be found in the `src/views` folder. In these views we use components which you can find in the `src/components` folder. The navigation between the pages is described in the `src/router/index.js` file. The store and modules (`src/store`) is used to keep a central state even when switching between pages, for more info check the docs.
 
 ## Communication with backend
 
