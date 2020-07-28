@@ -40,8 +40,6 @@
     },
     methods: {
       fetchUnit(id) {
-        // TODO: Should this be a getter?
-        console.log("Fetching unit " + id)
         fetch('/units/' + id)
           .then(response => response.json())
           .then(response => {
@@ -56,7 +54,6 @@
           .then(response => response.json())
           .then(response => {
             response.data.forEach(column => {
-              console.log(column)
               this.columns.push(column)
             })
           })
