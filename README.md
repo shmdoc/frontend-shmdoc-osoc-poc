@@ -37,7 +37,7 @@ install [Vue](https://vuejs.org/):
 ```bash
 npm install vue
 ```
-install the node modules:
+install the node modules from inside the root of the projectdirectory:
 ```bash
 npm install
 ```
@@ -45,7 +45,7 @@ and run the the development server:
 ```bash
 npm run serve
 ```
-now the frontend is available on port 8080 and you can start developing.
+now the frontend should be available on port 8080 and you can start developing.
 
 ## Project structure
 
