@@ -51,6 +51,6 @@ now the frontend should be available on port 8080 and you can start developing.
 
 In this project we use [Vue](https://vuejs.org/) in combination with [Vuex](https://vuex.vuejs.org/) and the [Vue router](https://router.vuejs.org/).
 
-## Comminication with backend
+## Communication with backend
 
 To communicate with the backend we use the [JSON API specifications](https://jsonapi.org/). You can find some examples in the store modules.
