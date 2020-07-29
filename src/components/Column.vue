@@ -59,7 +59,7 @@
             <table v-if="attributes['common-values']" style="width: 100%">
               <tr>
                 <th>element</th>
-                <th>occurrences</th>
+                <th>occurrences (top 5)</th>
               </tr>
               <tr v-for="(value, i) in JSON.parse(attributes['common-values'])" :key="i">
                 <td>{{value.element}}</td>
@@ -151,7 +151,7 @@
             <table v-if="attributes['common-values']" style="width: 100%">
               <tr>
                 <th>element</th>
-                <th>occurrances</th>
+                <th>occurrances (top 5)</th>
               </tr>
               <tr v-for="(value, i) in JSON.parse(attributes['common-values'])" :key="i">
                 <td>{{value.element}}</td>
