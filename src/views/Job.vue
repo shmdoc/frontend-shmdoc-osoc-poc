@@ -88,6 +88,9 @@ export default {
   },
   mounted: function() {
     this.job = this.$store.getters.getJobById(this.$route.params.id)
+    if (! this.job){
+      this.$store.dispatch('getJobs')
+    }
     this.fetch_columns()
     this.fetch_name()
     this.$store.dispatch('fetch_units')
